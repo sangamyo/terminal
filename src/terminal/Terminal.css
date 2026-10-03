@@ -1,0 +1,466 @@
+.terminal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.terminal.is-center {
+  left: 50%;
+  top: 50%;
+  width: min(880px, calc(100vw - 2 * var(--gutter)));
+  height: min(600px, calc(100dvh - 170px));
+  translate: -50% -46%;
+}
+
+.terminal.is-docked {
+  left: var(--gutter);
+  bottom: var(--gutter);
+  width: min(440px, calc(100vw - 2 * var(--gutter)));
+  height: min(300px, 38dvh);
+  font-size: 13px;
+}
+
+.terminal.is-collapsed {
+  display: none;
+}
+
+.terminal-pill {
+  position: absolute;
+  left: var(--gutter);
+  bottom: var(--gutter);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  cursor: text;
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.25);
+  flex: none;
+}
+
+.dots {
+  display: flex;
+  gap: 7px;
+}
+
+.dots span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #263330;
+}
+
+.dots span:nth-child(1) {
+  background: #ff5f6d;
+  opacity: 0.8;
+}
+.dots span:nth-child(2) {
+  background: #ffcc4d;
+  opacity: 0.8;
+}
+.dots span:nth-child(3) {
+  background: var(--green);
+  opacity: 0.8;
+}
+
+.terminal-title {
+  flex: 1;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.terminal-min {
+  border: 0;
+  background: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.terminal-min:hover {
+  color: var(--green);
+}
+
+.terminal-body {
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 18px 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(57, 255, 136, 0.3) transparent;
+  text-shadow: 0 0 6px rgba(57, 255, 136, 0.18);
+  cursor: text;
+}
+
+/* CRT: scanlines + soft vignette + faint flicker */
+.crt::before {
+  content: '';
+  position: sticky;
+  display: block;
+  top: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.terminal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.45) 100%);
+  mix-blend-mode: overlay;
+  animation: flicker 6s infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  47% {
+    opacity: 1;
+  }
+  48% {
+    opacity: 0.75;
+  }
+  49% {
+    opacity: 1;
+  }
+}
+
+.t-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 1.55em;
+}
+
+.t-block {
+  margin: 2px 0 6px;
+}
+
+.t-prompt {
+  color: var(--green);
+  white-space: nowrap;
+  text-shadow: var(--glow-green);
+}
+
+.t-echo {
+  margin-top: 8px;
+  color: #fff;
+}
+
+.t-sys {
+  color: var(--cyan);
+}
+.t-accent {
+  color: var(--green);
+}
+.t-dim {
+  color: var(--text-dim);
+}
+.t-err {
+  color: var(--danger);
+}
+.t-warn {
+  color: var(--warn);
+}
+.t-ok {
+  color: var(--green);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.t-key {
+  color: var(--cyan);
+}
+.t-link {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: rgba(34, 229, 255, 0.4);
+  text-underline-offset: 3px;
+}
+.t-link:hover {
+  color: var(--cyan);
+}
+
+.t-cmd {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--green);
+  cursor: pointer;
+  text-align: left;
+  text-decoration: underline dotted rgba(57, 255, 136, 0.45);
+  text-underline-offset: 3px;
+}
+
+.t-cmd:hover {
+  color: #fff;
+  text-shadow: var(--glow-green);
+}
+
+/* input */
+.t-input-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  align-items: baseline;
+}
+
+.t-input-row.is-hidden {
+  visibility: hidden;
+}
+
+.t-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.t-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font: inherit;
+  font-size: max(16px, 1em); /* prevents iOS zoom on focus */
+  opacity: 0;
+}
+
+.t-mirror {
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #fff;
+}
+
+.t-input:not(:focus) + .t-mirror .cursor {
+  animation: none;
+  background: transparent;
+  outline: 1px solid var(--green);
+  box-shadow: none;
+}
+
+/* welcome */
+.t-welcome {
+  margin: 14px 0 6px;
+  padding: 16px 18px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 10px;
+  background: rgba(57, 255, 136, 0.03);
+}
+
+.t-welcome-title {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(20px, 3.2vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-shadow:
+    0 0 18px rgba(57, 255, 136, 0.35),
+    0 0 2px rgba(34, 229, 255, 0.6);
+}
+
+.t-welcome-sub {
+  margin: 6px 0 12px;
+  color: var(--text-dim);
+}
+
+.t-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.t-quick .t-cmd {
+  padding: 4px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 12.5px;
+}
+
+.t-quick .t-cmd:hover {
+  border-color: var(--green);
+  background: rgba(57, 255, 136, 0.1);
+}
+
+/* blocks */
+.t-help {
+  display: grid;
+  gap: 2px;
+}
+
+.t-help-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+}
+
+.t-help-row.t-note {
+  grid-template-columns: 1fr;
+  margin-top: 6px;
+  font-size: 0.9em;
+}
+
+.t-progress {
+  display: grid;
+  gap: 4px;
+  max-width: 360px;
+}
+
+.t-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(57, 255, 136, 0.1);
+  overflow: hidden;
+}
+
+.t-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--cyan));
+  box-shadow: var(--glow-cyan);
+}
+
+.t-skills,
+.t-projects,
+.t-kv,
+.t-ls,
+.t-secret {
+  display: grid;
+  gap: 3px;
+}
+
+.t-skill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+}
+
+.t-skill-cat {
+  white-space: pre;
+  font-weight: 700;
+}
+
+.t-skill-list {
+  color: var(--text);
+  flex: 1;
+  min-width: 200px;
+}
+
+.t-project-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 12px;
+}
+
+.t-ls {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.t-neofetch {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.t-logo {
+  margin: 0;
+  color: var(--green);
+  line-height: 1.15;
+  font-size: 12px;
+  text-shadow: var(--glow-green);
+}
+
+.t-neo-info {
+  display: grid;
+  gap: 1px;
+}
+
+.t-swatches {
+  display: flex;
+  gap: 0;
+  margin-top: 6px;
+}
+
+.t-swatches span {
+  width: 26px;
+  height: 14px;
+}
+
+.t-coffee {
+  margin: 0;
+  color: var(--lime);
+  line-height: 1.2;
+}
+
+.t-steam {
+  display: inline-block;
+  color: var(--text-dim);
+  animation: steam 2s ease-in-out infinite;
+}
+
+@keyframes steam {
+  50% {
+    transform: translateY(-3px);
+    opacity: 0.5;
+  }
+}
+
+.is-docked .t-welcome-title {
+  font-size: 18px;
+}
+
+@media (max-width: 640px) {
+  .terminal.is-center {
+    top: auto;
+    bottom: var(--gutter);
+    translate: -50% 0;
+    height: calc(100dvh - 92px - var(--gutter));
+    font-size: 13.5px;
+  }
+
+  .terminal.is-docked {
+    height: 46dvh;
+    right: var(--gutter);
+    width: auto;
+  }
+
+  .t-help-row {
+    grid-template-columns: 92px 1fr;
+  }
+
+  .t-logo {
+    display: none;
+  }
+}
+
+/* On narrow screens the docked terminal overlays a panel, so it needs an opaque surface. */
+@media (max-width: 1023px) {
+  .terminal.is-docked {
+    background: rgba(5, 10, 9, 0.97);
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.7);
+  }
+}

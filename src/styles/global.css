@@ -1,0 +1,206 @@
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/700.css';
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/700.css';
+
+:root {
+  --bg: #050807;
+  --bg-2: #0b0f0e;
+  --panel: rgba(10, 18, 16, 0.62);
+  --panel-strong: rgba(8, 14, 13, 0.86);
+  --line: rgba(57, 255, 136, 0.16);
+  --line-strong: rgba(57, 255, 136, 0.38);
+  --text: #d8f5e6;
+  --text-dim: #7d9a8c;
+  --green: #39ff88;
+  --cyan: #22e5ff;
+  --lime: #c6ff3d;
+  --blue: #7aa2ff;
+  --danger: #ff5f6d;
+  --warn: #ffcc4d;
+  --glow-green: 0 0 12px rgba(57, 255, 136, 0.45);
+  --glow-cyan: 0 0 14px rgba(34, 229, 255, 0.45);
+  --radius: 14px;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --display: 'Space Grotesk', 'JetBrains Mono', system-ui, sans-serif;
+  --gutter: clamp(16px, 2.5vw, 28px);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+::selection {
+  background: rgba(57, 255, 136, 0.3);
+  color: #fff;
+}
+
+a {
+  color: var(--cyan);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Glassmorphism surface shared by terminal, panels and nav */
+.glass {
+  background: linear-gradient(160deg, rgba(16, 28, 25, 0.72), rgba(6, 11, 10, 0.78));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 20px 60px -20px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 40px -18px rgba(57, 255, 136, 0.35);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.15em;
+  margin: 0 1px;
+  vertical-align: text-bottom;
+  background: var(--green);
+  box-shadow: var(--glow-green);
+  animation: blink 1.05s steps(1) infinite;
+}
+
+.cursor-inline {
+  animation: none;
+  opacity: 0.85;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.app {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.canvas-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.ui-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ui-layer > * {
+  pointer-events: auto;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  background: rgba(57, 255, 136, 0.06);
+  color: var(--text);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.btn:hover {
+  background: rgba(57, 255, 136, 0.14);
+  border-color: var(--green);
+  box-shadow: var(--glow-green);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-cyan {
+  border-color: rgba(34, 229, 255, 0.4);
+  background: rgba(34, 229, 255, 0.06);
+}
+
+.btn-cyan:hover {
+  border-color: var(--cyan);
+  background: rgba(34, 229, 255, 0.14);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-ghost {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: transparent;
+}
+
+.btn[aria-disabled='true'] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+.reduced-motion .cursor {
+  animation: none;
+}
