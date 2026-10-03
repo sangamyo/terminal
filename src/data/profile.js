@@ -19,7 +19,7 @@ export const profile = {
     'AI Engineer and Software Developer passionate about Artificial Intelligence, Generative AI, Computer Vision, Robotics, and Vision-Language-Action systems.',
   location: 'India', // TODO: e.g. "Greater Noida, India"
   primaryLanguage: 'Python',
-  mainStack: 'PyTorch · OpenCV · LeRobot · FastAPI · React',
+  mainStack: 'PyTorch · OpenCV · LeRobot · MERN · Next.js',
   currentFocus: 'Vision-Language-Action models & robot learning',
   status: 'Open to AI / Robotics roles',
   links: {
@@ -43,6 +43,7 @@ export const skillCategories = [
   { id: 'cv', label: 'Computer Vision', color: '#22e5ff' },
   { id: 'robotics', label: 'Robotics', color: '#c6ff3d' },
   { id: 'software', label: 'Software', color: '#7aa2ff' },
+  { id: 'web', label: 'Full-Stack Web', color: '#b18cff' },
 ]
 
 // level: 0–100 (self-assessed). context: one line shown in the hover panel.
@@ -76,14 +77,24 @@ export const skills = [
   { id: 'vla', name: 'VLA', category: 'robotics', level: 70, context: 'Vision-Language-Action models that map instructions to motion.', projects: ['vla'] },
 
   // Software
-  { id: 'py-sw', name: 'Python', category: 'software', level: 92, context: 'Backends, automation, desktop apps and scripting.', projects: ['assistant', 'traffic'] },
+  { id: 'py-sw', name: 'Python', category: 'software', level: 92, context: 'Backends, automation, desktop apps and scripting.', projects: ['assistant', 'traffic', 'hand'] },
+  { id: 'java', name: 'Java', category: 'software', level: 80, context: 'OOP and problem solving — certified by ApnaCollege.', projects: [] },
   { id: 'cpp', name: 'C++', category: 'software', level: 68, context: 'Performance-sensitive code and robotics tooling.', projects: [] },
-  { id: 'js', name: 'JavaScript', category: 'software', level: 72, context: 'Interactive frontends — including this portfolio.', projects: [] },
-  { id: 'react', name: 'React', category: 'software', level: 70, context: 'Component-driven UIs and dashboards.', projects: [] },
-  { id: 'fastapi', name: 'FastAPI', category: 'software', level: 76, context: 'Serving ML models behind clean, typed APIs.', projects: ['ats'] },
+  { id: 'sql', name: 'SQL', category: 'software', level: 78, context: 'Relational modelling and query optimisation.', projects: [] },
   { id: 'git', name: 'Git', category: 'software', level: 85, context: 'Branching workflows, reviews and versioned experiments.', projects: [] },
   { id: 'docker', name: 'Docker', category: 'software', level: 70, context: 'Reproducible environments for training and deployment.', projects: [] },
   { id: 'linux', name: 'Linux', category: 'software', level: 82, context: 'Daily driver for development, GPUs and robots.', projects: ['vla'] },
+
+  // Full-stack web
+  { id: 'js', name: 'JavaScript', category: 'web', level: 85, context: 'Interactive frontends — including this portfolio.', projects: ['algoflow'] },
+  { id: 'react', name: 'React', category: 'web', level: 84, context: 'Component-driven UIs, dashboards and this 3D site.', projects: ['algoflow'] },
+  { id: 'nextjs', name: 'Next.js', category: 'web', level: 80, context: 'Full-stack apps with SSR and API routes.', projects: ['algoflow'] },
+  { id: 'node', name: 'Node.js', category: 'web', level: 82, context: 'MERN backends serving 500+ users at PureWashr.', projects: [] },
+  { id: 'express', name: 'Express', category: 'web', level: 82, context: 'RESTful APIs and vendor-workflow integrations.', projects: [] },
+  { id: 'fastapi', name: 'FastAPI', category: 'web', level: 76, context: 'Serving ML models behind clean, typed APIs.', projects: ['ats'] },
+  { id: 'django', name: 'Django', category: 'web', level: 68, context: 'Batteries-included Python web backends.', projects: [] },
+  { id: 'mongodb', name: 'MongoDB', category: 'web', level: 82, context: 'Document data models for real-time products.', projects: ['algoflow'] },
+  { id: 'postgres', name: 'PostgreSQL', category: 'web', level: 72, context: 'Relational storage for transactional systems.', projects: [] },
 ]
 
 /* ------------------------------------------------------------------ */
@@ -109,30 +120,58 @@ export const projects = [
   },
   {
     id: 'traffic',
-    title: 'AI Traffic Signal System',
+    title: 'AI Traffic Signal System (SYNCRONET-AI)',
     short: 'Intelligent traffic intersection simulation using computer vision and adaptive signal logic.',
     tech: ['Python', 'OpenCV', 'YOLO', 'Pygame'],
     visual: 'traffic',
-    github: `${GITHUB}/Traffic-Intersection-Simulation-with-Stats`,
+    github: `${GITHUB}/sangamyo-sangamyo-Synchronet-Traffic-Simulation-with-stats`,
     live: null,
     details: [
-      'Detects and counts vehicles per lane with YOLO.',
-      'Adapts green-light timing to measured lane density instead of fixed cycles.',
-      'Visualises the intersection and signal states in a Pygame simulation.',
+      'Adaptive traffic control driven by vehicle-density algorithms and real-time signal optimisation.',
+      'Detects and counts vehicles per lane, adapting green-light timing instead of fixed cycles.',
+      'Smart-traffic environment simulated in Python and Pygame to reduce congestion and improve flow.',
     ],
   },
   {
     id: 'ats',
     title: 'ATS Resume Checker',
     short: 'AI-powered resume analysis and job-description matching system.',
-    tech: ['Python', 'Generative AI'],
+    tech: ['Python', 'Google Gemini', 'Streamlit', 'Generative AI'],
     visual: 'resume',
     github: `${GITHUB}/ats-resume-checker-by-google-gemini`,
     live: 'https://ats-resume-checker-by-google-gemini.vercel.app',
     details: [
-      'Parses resumes and compares them against a target job description.',
-      'Uses an LLM to score fit, surface missing keywords and suggest improvements.',
-      'Produces structured, actionable feedback rather than a single number.',
+      'ATS scoring, keyword optimisation and semantic evaluation powered by the Google Gemini API.',
+      'Compares a resume against a target job description and surfaces missing keywords.',
+      'Interactive Streamlit interface delivering real-time, actionable feedback.',
+    ],
+  },
+  {
+    id: 'algoflow',
+    title: 'AlgoFlow Tracker',
+    short: 'Full-stack DSA analytics platform with real-time progress tracking.',
+    tech: ['Next.js', 'MongoDB', 'REST APIs', 'Auth'],
+    visual: 'algo',
+    github: `${GITHUB}/AlgoFlow-tracker`,
+    live: 'https://algo-flow-tracker.vercel.app',
+    details: [
+      'Scalable full-stack platform built with Next.js and MongoDB to track DSA progress.',
+      'Real-time analytics dashboards and secure authentication.',
+      'Cloud-deployed architecture with optimised REST APIs for high availability.',
+    ],
+  },
+  {
+    id: 'hand',
+    title: 'Hand Gesture Control System',
+    short: 'Touchless computer control with hand gestures and voice.',
+    tech: ['Python', 'OpenCV', 'MediaPipe', 'Speech Recognition'],
+    visual: 'hand',
+    github: `${GITHUB}/control_with_hand_gesture`,
+    live: null,
+    details: [
+      'Computer-vision control system built with OpenCV and MediaPipe hand tracking.',
+      'Gesture-driven screen control plus voice-controlled volume.',
+      'Multimodal, touchless input that improves usability and accessibility.',
     ],
   },
   {
@@ -185,45 +224,49 @@ export const projects = [
 
 export const timeline = [
   {
-    id: 'btech',
-    kind: 'milestone',
-    company: 'GL Bajaj Institute of Technology and Management',
-    role: 'Started B.Tech — Computer Science',
-    duration: '2023',
-    responsibilities: ['Core CS: data structures, algorithms, OS, DBMS, networks.'],
-    tech: ['C', 'Python', 'Java'],
-    achievements: ['Infosys Springboard certifications in Python and C.'],
+    id: 'freelance',
+    kind: 'work',
+    company: 'Freelance',
+    role: 'Software Developer',
+    duration: 'Jun 2023 – Feb 2024',
+    responsibilities: [
+      'Built production-grade authentication systems, dashboards and automation tools for multiple client-style projects.',
+      'Optimised backend logic and added caching strategies.',
+    ],
+    tech: ['JavaScript', 'Node.js', 'React', 'MongoDB', 'JWT / OAuth'],
+    achievements: ['Reduced API response time by 50%.'],
   },
   {
-    id: 'builder',
-    kind: 'milestone',
-    company: 'Independent Projects',
-    role: 'Computer Vision & GenAI Builder',
-    duration: '2024 – 2025',
+    id: 'purewashr',
+    kind: 'work',
+    company: 'PureWashr',
+    role: 'Full Stack Developer Intern',
+    duration: 'Sep 2024 – Feb 2025',
     responsibilities: [
-      'Built real-time CV systems: face detection and adaptive traffic signals.',
-      'Shipped GenAI tools: ATS resume checker and image style transfer.',
+      'Architected and deployed a scalable MERN platform with real-time scheduling and order tracking.',
+      'Engineered RESTful APIs and integrated 15+ vendor workflows.',
+      'Optimised backend performance through query optimisation and efficient API design.',
     ],
-    tech: ['OpenCV', 'YOLO', 'PyTorch', 'LLMs'],
-    achievements: ['Six end-to-end AI projects from idea to working demo.'],
+    tech: ['MongoDB', 'Express', 'React', 'Node.js', 'REST APIs'],
+    achievements: [
+      'Platform serving 500+ active users.',
+      'Reduced latency by 40%.',
+      'Helped secure INR 1L+ funding and Startup India recognition.',
+    ],
   },
   {
     id: 'addverb',
     kind: 'work',
-    company: 'Addverb',
-    role: 'AI / Robotics Intern',
-    duration: 'MM/YYYY – MM/YYYY', // TODO: real dates
+    company: 'Addverb Technologies',
+    role: 'Robotics & AI Intern',
+    duration: 'May 2026 – Nov 2026',
     responsibilities: [
-      // TODO: replace with your actual responsibilities.
-      'Robot learning data collection and dataset curation.',
-      'Simulation experiments for manipulation tasks.',
-      'Training and evaluating imitation-learning / VLA policies.',
+      "Working in the CEO Office's Advanced Robotics department on VLA (Vision-Language-Action) data collection for robotic manipulation models.",
+      'Contributing to teleoperation pipelines and automation workflows for data collection across remote and local machines.',
+      'Supporting development of AI-driven robotic systems to advance autonomous manipulation.',
     ],
-    tech: ['Python', 'PyTorch', 'LeRobot', 'MuJoCo', 'ROS'],
-    achievements: [
-      // TODO: replace with concrete, measurable outcomes.
-      'Contributed to the robotics AI pipeline from data to deployed policy.',
-    ],
+    tech: ['Python', 'LeRobot', 'Teleoperation', 'VLA', 'Linux'],
+    achievements: ['Building the data foundation for next-generation robot manipulation models.'],
   },
   {
     id: 'now',
@@ -233,7 +276,7 @@ export const timeline = [
     duration: '2026 →',
     responsibilities: ['Exploring Vision-Language-Action models and robot foundation models.'],
     tech: ['VLA', 'Diffusion Policy', 'LeRobot'],
-    achievements: ['Open to AI / Robotics engineering roles.'],
+    achievements: ['Open to AI / Robotics / Full-Stack engineering roles.'],
   },
 ]
 
@@ -244,8 +287,13 @@ export const timeline = [
 export const education = {
   degree: 'B.Tech — Computer Science Engineering',
   school: 'GL Bajaj Institute of Technology and Management',
+  university: 'Dr. A.P.J. Abdul Kalam Technical University',
   years: '2023 – 2026',
+  previous: [
+    { degree: 'Polytechnic Diploma — Computer Science', school: 'Board of Technical Education, Uttar Pradesh', years: '2020 – 2023' },
+  ],
   certifications: [
+    { name: 'Java & Problem Solving', issuer: 'ApnaCollege', badge: 'JV' },
     { name: 'Python Certification', issuer: 'Infosys Springboard', badge: 'PY' },
     { name: 'Programming in C', issuer: 'Infosys Springboard', badge: 'C' },
   ],
@@ -263,7 +311,7 @@ export const domains = [
   { label: 'ROBOTICS', view: 'experience', focus: 'addverb' },
   { label: 'VLA', view: 'projects', focus: 'vla' },
   { label: 'DEEP LEARNING', view: 'skills', focus: 'ai' },
-  { label: 'SOFTWARE ENGINEERING', view: 'projects', focus: 'assistant' },
+  { label: 'SOFTWARE ENGINEERING', view: 'projects', focus: 'algoflow' },
 ]
 
 export const getProject = (id) => projects.find((p) => p.id === id)

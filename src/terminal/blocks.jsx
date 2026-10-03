@@ -141,8 +141,13 @@ export function EducationBlock() {
         <span className="t-accent">{education.degree}</span>
       </Row>
       <Row>
-        {education.school} <span className="t-dim">· {education.years}</span>
+        {education.school} <span className="t-dim">· {education.university} · {education.years}</span>
       </Row>
+      {education.previous?.map((e) => (
+        <Row key={e.degree}>
+          {e.degree} <span className="t-dim">· {e.school} · {e.years}</span>
+        </Row>
+      ))}
       {education.certifications.map((c) => (
         <Row key={c.name} className="t-dim">
           {'  ✓ '}

@@ -1021,3 +1021,15 @@
     display: none;
   }
 }
+
+.prev-edu {
+  margin-bottom: 4px;
+  border-color: rgba(34, 229, 255, 0.25);
+  background: rgba(34, 229, 255, 0.04);
+}
+
+.prev-edu .cert-badge {
+  color: var(--cyan);
+  background: rgba(34, 229, 255, 0.15);
+  font-size: 11px;
+}

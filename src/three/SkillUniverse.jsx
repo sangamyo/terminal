@@ -8,7 +8,10 @@ import { ANCHORS, FONT_MONO } from './layout'
 import { neon } from './materials'
 
 const RADIUS = 5
-const BAND_LAT = { ai: 0.62, cv: 0.2, robotics: -0.22, software: -0.62 }
+// One latitude band per category, spread evenly from top to bottom.
+const BAND_LAT = Object.fromEntries(
+  skillCategories.map((c, i) => [c.id, 0.72 - (i * 1.44) / Math.max(1, skillCategories.length - 1)]),
+)
 const CARD_H = 0.58
 /** Card width grows with the label so names never wrap. */
 const cardWidth = (name) => MathUtils.clamp(0.62 + name.length * 0.112, 1.35, 3)

@@ -261,7 +261,80 @@ function RobotVisual() {
   )
 }
 
+function AlgoVisual() {
+  const bars = useRef([])
+  const t = useTime()
+  const N = 9
+  useFrame(() => {
+    bars.current.forEach((b, i) => {
+      if (!b) return
+      const h = 0.15 + ((Math.sin(t.current * 0.8 + i * 0.7) + 1) / 2) * 0.35 + i * 0.07
+      b.scale.y = h
+      b.position.y = -0.55 + h / 2
+    })
+  })
+  return (
+    <group rotation={[0.25, -0.5, 0]}>
+      {Array.from({ length: N }, (_, i) => (
+        <mesh key={i} position={[(i - (N - 1) / 2) * 0.17, 0, 0]} ref={(el) => (bars.current[i] = el)}>
+          <boxGeometry args={[0.11, 1, 0.11]} />
+          <meshBasicMaterial color={neon(i > 5 ? '#39ff88' : '#22e5ff', 1.8)} toneMapped={false} />
+        </mesh>
+      ))}
+      <Line points={Array.from({ length: N }, (_, i) => [(i - (N - 1) / 2) * 0.17, -0.2 + i * 0.09, 0.1])} color={neon('#c6ff3d', 2.4)} lineWidth={2} toneMapped={false} />
+      <mesh position={[0, -0.56, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[1.7, 0.6, 10, 4]} />
+        <meshBasicMaterial color={neon('#22e5ff', 0.8)} wireframe transparent opacity={0.25} toneMapped={false} />
+      </mesh>
+    </group>
+  )
+}
+
+function HandVisual() {
+  const fingers = useRef([])
+  const hand = useRef()
+  const t = useTime()
+  const spread = [-0.24, -0.08, 0.08, 0.24]
+  useFrame(() => {
+    hand.current.rotation.y = Math.sin(t.current * 0.6) * 0.5
+    fingers.current.forEach((f, i) => {
+      if (f) f.rotation.x = (Math.sin(t.current * 2 + i * 0.5) * 0.5 + 0.5) * 1.2
+    })
+  })
+  const mat = <meshBasicMaterial color={neon('#22e5ff', 1.6)} wireframe toneMapped={false} />
+  return (
+    <group ref={hand} position={[0, -0.25, 0]}>
+      <mesh>
+        <boxGeometry args={[0.62, 0.55, 0.14, 3, 3, 1]} />
+        {mat}
+      </mesh>
+      {spread.map((x, i) => (
+        <group key={i} position={[x, 0.28, 0]} ref={(el) => (fingers.current[i] = el)}>
+          <mesh position={[0, 0.2, 0]}>
+            <capsuleGeometry args={[0.05, 0.3, 4, 8]} />
+            <meshBasicMaterial color={neon('#39ff88', 2)} toneMapped={false} />
+          </mesh>
+        </group>
+      ))}
+      <group position={[-0.36, 0.05, 0]} rotation={[0, 0, 0.8]}>
+        <mesh position={[0, 0.16, 0]}>
+          <capsuleGeometry args={[0.055, 0.22, 4, 8]} />
+          <meshBasicMaterial color={neon('#39ff88', 2)} toneMapped={false} />
+        </mesh>
+      </group>
+      {[[-0.24, 0.62], [0.08, 0.7], [0.24, 0.64], [-0.36, 0.3]].map(([x, y], i) => (
+        <mesh key={i} position={[x, y, 0.08]}>
+          <sphereGeometry args={[0.03, 8, 8]} />
+          <meshBasicMaterial color={neon('#c6ff3d', 3)} toneMapped={false} />
+        </mesh>
+      ))}
+    </group>
+  )
+}
+
 export const projectVisuals = {
+  algo: AlgoVisual,
+  hand: HandVisual,
   face: FaceVisual,
   traffic: TrafficVisual,
   resume: ResumeVisual,

@@ -238,7 +238,7 @@ function ProjectCard({ project, index }) {
       <div className="project-card-head">
         <span className="project-id">PRJ_{String(index + 1).padStart(2, '0')}</span>
         <span className="project-glyph" aria-hidden="true">
-          {{ face: '◉', traffic: '⊕', resume: '▤', voice: '◍', style: '✦', robot: '⌬' }[project.visual]}
+          {{ face: '◉', traffic: '⊕', resume: '▤', voice: '◍', style: '✦', robot: '⌬', algo: '▥', hand: '✋' }[project.visual]}
         </span>
       </div>
       <h3>{project.title}</h3>
@@ -367,7 +367,20 @@ export function EducationPanel() {
   return (
     <Panel path="education/" kicker="education module" title={education.degree}>
       <p className="panel-role">{education.school}</p>
-      <p className="panel-lead">{education.years}</p>
+      <p className="panel-lead">
+        {education.university} · {education.years}
+      </p>
+      {education.previous?.map((e) => (
+        <div key={e.degree} className="cert prev-edu">
+          <span className="cert-badge">DIP</span>
+          <div>
+            <div className="cert-name">{e.degree}</div>
+            <div className="cert-issuer">
+              {e.school} · {e.years}
+            </div>
+          </div>
+        </div>
+      ))}
       <h3 className="label">certifications</h3>
       <div className="certs">
         {education.certifications.map((c) => (
