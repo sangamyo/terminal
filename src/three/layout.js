@@ -1,8 +1,10 @@
 import { Vector3 } from 'three'
 import { projects, timeline } from '../data/profile'
 
-export const FONT_MONO = '/fonts/jetbrains-mono-latin-500-normal.woff'
-export const FONT_DISPLAY = '/fonts/space-grotesk-latin-700-normal.woff'
+// BASE_URL keeps public assets working when the site is served from a sub-path (GitHub Pages).
+const BASE = import.meta.env.BASE_URL
+export const FONT_MONO = `${BASE}fonts/jetbrains-mono-latin-500-normal.woff`
+export const FONT_DISPLAY = `${BASE}fonts/space-grotesk-latin-700-normal.woff`
 
 /** World-space anchor of every section. The AI core sits at the origin. */
 export const ANCHORS = {

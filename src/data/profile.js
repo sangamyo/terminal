@@ -27,7 +27,7 @@ export const profile = {
     linkedin: 'https://www.linkedin.com/in/hari-om-kasaundhan-321b0b2a6/',
     email: 'sangamgupta988@gmail.com',
     phone: '+91 90059 79045',
-    resume: '/resume.pdf', // TODO: drop your resume at public/resume.pdf
+    resume: `${import.meta.env.BASE_URL}resume.pdf`, // TODO: drop your resume at public/resume.pdf
   },
   // Optional: a Formspree / Getform / custom endpoint that accepts JSON POSTs.
   // When empty, the contact form falls back to opening the visitor's mail client.
