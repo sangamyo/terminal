@@ -162,14 +162,15 @@ export const projects = [
     id: 'traffic',
     title: 'SYNCRONET-AI Traffic Signals',
     short: 'Density-based adaptive traffic-signal simulation in Python and Pygame.',
-    tech: ['Python', 'Pygame'],
+    tech: ['Python', 'Pygame', 'asyncio', 'WebAssembly'],
     visual: 'traffic',
     github: `${GITHUB}/sangamyo-sangamyo-Synchronet-Traffic-Simulation-with-stats`,
-    live: null,
+    live: 'https://sangamyo.github.io/sangamyo-sangamyo-Synchronet-Traffic-Simulation-with-stats/',
     details: [
       'Simulates a four-way intersection — vehicles, lanes, turns and timed signals — in Python and Pygame.',
       'Density-based adaptive signals: each green phase is lengthened according to the number of vehicles waiting at that signal.',
-      'Shows live per-direction vehicle counts and prints cumulative traffic statistics at the end of a run.',
+      'Shows live per-direction vehicle counts and cumulative traffic statistics at the end of a run.',
+      'Runs in the browser: a single asyncio loop compiled to WebAssembly with pygbag, deployed to GitHub Pages.',
     ],
   },
   {
