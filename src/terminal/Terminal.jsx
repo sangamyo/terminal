@@ -256,7 +256,7 @@ export default function Terminal() {
 function Welcome() {
   return (
     <div className="t-welcome">
-      <h1 className="t-welcome-title">Welcome to Hariom&apos;s Digital Workspace.</h1>
+      <h1 className="t-welcome-title">Welcome to Hari Om&apos;s Digital Workspace.</h1>
       <p className="t-welcome-sub">
         Type <Cmd>help</Cmd> to explore.
       </p>

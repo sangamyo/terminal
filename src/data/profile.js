@@ -2,32 +2,30 @@
  * Single source of truth for all portfolio content.
  * Edit this file to update text, links, skills, projects and timeline —
  * the terminal, the HTML panels and the 3D scenes all read from here.
- *
- * Search for "TODO" to find values that still need your real details.
  */
 
 const GITHUB_USER = 'sangamyo'
 const GITHUB = `https://github.com/${GITHUB_USER}`
 
 export const profile = {
-  name: 'Hariom Kasaundhan',
-  handle: 'hariom',
+  name: 'Hari Om Kasaundhan',
+  handle: 'hari-om',
   host: 'portfolio',
-  role: 'AI Engineer | Software Developer | Robotics & VLA Enthusiast',
+  role: 'AI Engineer | Software Engineer | Robotics & VLA',
   tagline: "Don't just read my resume. Explore my system.",
   about:
-    'AI Engineer and Software Developer passionate about Artificial Intelligence, Generative AI, Computer Vision, Robotics, and Vision-Language-Action systems.',
-  location: 'India', // TODO: e.g. "Greater Noida, India"
+    'AI Engineer and Software Engineer (B.Tech CSE 2026) building Python backends and LLM-powered data systems with FastAPI, PostgreSQL, embeddings and semantic search. Currently a Robotics & AI Intern at Addverb Technologies, building robot-learning (VLA) datasets with LeRobot, MuJoCo and PyTorch.',
+  location: 'Greater Noida / Noida, India',
   primaryLanguage: 'Python',
-  mainStack: 'PyTorch · OpenCV · LeRobot · MERN · Next.js',
-  currentFocus: 'Vision-Language-Action models & robot learning',
-  status: 'Open to AI / Robotics roles',
+  mainStack: 'Python · FastAPI · PyTorch · PostgreSQL · React',
+  currentFocus: 'LLM data tooling & robot-learning (VLA) data',
+  status: 'Available immediately — open to AI / Software Engineer roles',
   links: {
     github: GITHUB,
     linkedin: 'https://www.linkedin.com/in/hari-om-kasaundhan-321b0b2a6/',
-    email: 'sangamgupta988@gmail.com',
+    email: 'hariomkasaundhan988@gmail.com',
     phone: '+91 90059 79045',
-    resume: `${import.meta.env.BASE_URL}resume.pdf`, // TODO: drop your resume at public/resume.pdf
+    resume: `${import.meta.env.BASE_URL}resume.pdf`,
   },
   // Optional: a Formspree / Getform / custom endpoint that accepts JSON POSTs.
   // When empty, the contact form falls back to opening the visitor's mail client.
@@ -43,58 +41,57 @@ export const skillCategories = [
   { id: 'cv', label: 'Computer Vision', color: '#22e5ff' },
   { id: 'robotics', label: 'Robotics', color: '#c6ff3d' },
   { id: 'software', label: 'Software', color: '#7aa2ff' },
-  { id: 'web', label: 'Full-Stack Web', color: '#b18cff' },
+  { id: 'web', label: 'Backend & Web', color: '#b18cff' },
 ]
 
 // level: 0–100 (self-assessed). context: one line shown in the hover panel.
 // projects: ids from the `projects` array below.
 export const skills = [
   // AI / ML
-  { id: 'py-ai', name: 'Python', category: 'ai', level: 92, context: 'Primary language for models, data pipelines and tooling.', projects: ['face-detect', 'ats', 'vla'] },
-  { id: 'pytorch', name: 'PyTorch', category: 'ai', level: 82, context: 'Training and fine-tuning vision and policy networks.', projects: ['ghibli', 'vla'] },
-  { id: 'tensorflow', name: 'TensorFlow', category: 'ai', level: 65, context: 'Classical deep learning workflows and model export.', projects: [] },
-  { id: 'ml', name: 'Machine Learning', category: 'ai', level: 82, context: 'Supervised learning, evaluation and feature engineering.', projects: ['ats'] },
-  { id: 'dl', name: 'Deep Learning', category: 'ai', level: 80, context: 'CNNs, transformers and generative architectures.', projects: ['ghibli', 'vla'] },
-  { id: 'genai', name: 'Generative AI', category: 'ai', level: 82, context: 'LLM-powered apps and image generation pipelines.', projects: ['ats', 'ghibli'] },
-  { id: 'llms', name: 'LLMs', category: 'ai', level: 78, context: 'Prompting, tool use and structured output for real products.', projects: ['ats'] },
-  { id: 'rag', name: 'RAG', category: 'ai', level: 72, context: 'Retrieval pipelines over documents with embeddings.', projects: ['ats'] },
-  { id: 'finetune', name: 'Fine-tuning', category: 'ai', level: 68, context: 'Adapting pretrained models to domain-specific data.', projects: ['vla'] },
+  { id: 'py-ai', name: 'Python', category: 'ai', level: 92, context: 'Primary language for backends, data pipelines and ML tooling.', projects: ['datalens', 'ats', 'vla'] },
+  { id: 'pytorch', name: 'PyTorch', category: 'ai', level: 72, context: 'PyTorch-based VLA training and evaluation pipelines at Addverb.', projects: ['vla', 'ghibli'] },
+  { id: 'ml', name: 'Machine Learning', category: 'ai', level: 76, context: 'Dataset quality, evaluation and the workflow around models.', projects: ['datalens', 'ats'] },
+  { id: 'dl', name: 'Deep Learning', category: 'ai', level: 72, context: 'Neural networks, transformers and embedding models.', projects: ['vla', 'ghibli'] },
+  { id: 'genai', name: 'Generative AI', category: 'ai', level: 80, context: 'LLM-powered products: dataset QC, natural-language search, resume analysis.', projects: ['datalens', 'ats'] },
+  { id: 'llms', name: 'LLMs', category: 'ai', level: 80, context: 'Gemini / Claude APIs, prompt templates and validated structured output.', projects: ['datalens', 'ats'] },
+  { id: 'embeddings', name: 'Embeddings / Semantic Search', category: 'ai', level: 74, context: 'bge-small embeddings in pgvector with an HNSW index (~6 ms top-25 queries).', projects: ['datalens'] },
+  { id: 'hf', name: 'Hugging Face', category: 'ai', level: 74, context: 'Importing instruction / chat datasets and running embedding models.', projects: ['datalens'] },
 
   // Computer Vision
-  { id: 'opencv', name: 'OpenCV', category: 'cv', level: 88, context: 'Real-time video pipelines, filtering and geometry.', projects: ['face-detect', 'traffic'] },
-  { id: 'yolo', name: 'YOLO', category: 'cv', level: 80, context: 'Real-time object detection for vehicles and scenes.', projects: ['traffic'] },
-  { id: 'face', name: 'Face Detection', category: 'cv', level: 85, context: 'Haar cascades and dlib landmarks for face tracking.', projects: ['face-detect'] },
-  { id: 'objdet', name: 'Object Detection', category: 'cv', level: 80, context: 'Detection, counting and tracking in live feeds.', projects: ['traffic', 'face-detect'] },
-  { id: 'imgproc', name: 'Image Processing', category: 'cv', level: 84, context: 'Transforms, augmentation and style manipulation.', projects: ['ghibli', 'face-detect'] },
+  { id: 'opencv', name: 'OpenCV', category: 'cv', level: 75, context: 'Real-time webcam pipelines for hand tracking and face detection.', projects: ['hand', 'face-detect'] },
+  { id: 'face', name: 'Face Detection', category: 'cv', level: 72, context: 'Haar cascades and dlib for face tracking.', projects: ['face-detect'] },
+  { id: 'objdet', name: 'Object Detection', category: 'cv', level: 65, context: 'Detection and counting in live video feeds.', projects: ['face-detect'] },
+  { id: 'imgproc', name: 'Image Processing', category: 'cv', level: 72, context: 'Transforms, filtering and style manipulation.', projects: ['ghibli', 'face-detect'] },
 
   // Robotics
-  { id: 'ros', name: 'ROS', category: 'robotics', level: 62, context: 'Nodes, topics and robot integration basics.', projects: ['vla'] },
-  { id: 'lerobot', name: 'LeRobot', category: 'robotics', level: 75, context: 'Dataset recording, training and evaluating robot policies.', projects: ['vla'] },
-  { id: 'mujoco', name: 'MuJoCo', category: 'robotics', level: 70, context: 'Physics simulation for manipulation experiments.', projects: ['vla'] },
-  { id: 'il', name: 'Imitation Learning', category: 'robotics', level: 72, context: 'Learning policies from teleoperated demonstrations.', projects: ['vla'] },
-  { id: 'rl', name: 'Reinforcement Learning', category: 'robotics', level: 62, context: 'Reward-driven policy learning in simulation.', projects: ['vla'] },
-  { id: 'diffusion', name: 'Diffusion Policy', category: 'robotics', level: 65, context: 'Diffusion-based action generation for manipulation.', projects: ['vla'] },
-  { id: 'vla', name: 'VLA', category: 'robotics', level: 70, context: 'Vision-Language-Action models that map instructions to motion.', projects: ['vla'] },
+  { id: 'lerobot', name: 'LeRobot', category: 'robotics', level: 75, context: 'Recording teleoperated manipulation datasets in LeRobot format.', projects: ['vla'] },
+  { id: 'mujoco', name: 'MuJoCo', category: 'robotics', level: 65, context: 'Simulation for robotic-manipulation VLA pipelines.', projects: ['vla'] },
+  { id: 'il', name: 'Imitation Learning', category: 'robotics', level: 62, context: 'Teleoperated demonstration data for learning manipulation from examples.', projects: ['vla'] },
+  { id: 'vla', name: 'VLA', category: 'robotics', level: 68, context: 'Vision-Language-Action datasets and training / evaluation pipelines.', projects: ['vla'] },
 
   // Software
-  { id: 'py-sw', name: 'Python', category: 'software', level: 92, context: 'Backends, automation, desktop apps and scripting.', projects: ['assistant', 'traffic', 'hand'] },
-  { id: 'java', name: 'Java', category: 'software', level: 80, context: 'OOP and problem solving — certified by ApnaCollege.', projects: [] },
-  { id: 'cpp', name: 'C++', category: 'software', level: 68, context: 'Performance-sensitive code and robotics tooling.', projects: [] },
-  { id: 'sql', name: 'SQL', category: 'software', level: 78, context: 'Relational modelling and query optimisation.', projects: [] },
-  { id: 'git', name: 'Git', category: 'software', level: 85, context: 'Branching workflows, reviews and versioned experiments.', projects: [] },
-  { id: 'docker', name: 'Docker', category: 'software', level: 70, context: 'Reproducible environments for training and deployment.', projects: [] },
-  { id: 'linux', name: 'Linux', category: 'software', level: 82, context: 'Daily driver for development, GPUs and robots.', projects: ['vla'] },
+  { id: 'py-sw', name: 'Python', category: 'software', level: 92, context: 'Backends, automation, desktop apps and scripting.', projects: ['datalens', 'traffic', 'hand', 'assistant'] },
+  { id: 'java', name: 'Java', category: 'software', level: 75, context: 'OOP and problem solving — certified by ApnaCollege.', projects: [] },
+  { id: 'sql', name: 'SQL', category: 'software', level: 78, context: 'Relational modelling, queries and indexing.', projects: ['datalens'] },
+  { id: 'dsa', name: 'Data Structures & Algorithms', category: 'software', level: 78, context: 'Problem-solving practice, tracked with AlgoFlow.', projects: ['algoflow'] },
+  { id: 'bash', name: 'Bash', category: 'software', level: 75, context: 'Automating teleoperation and data-collection workflows across machines.', projects: ['vla'] },
+  { id: 'git', name: 'Git', category: 'software', level: 82, context: 'Branching workflows, reviews and versioned experiments.', projects: [] },
+  { id: 'docker', name: 'Docker', category: 'software', level: 72, context: 'Containerised FastAPI, PostgreSQL and Redis services.', projects: ['datalens'] },
+  { id: 'linux', name: 'Linux', category: 'software', level: 80, context: 'Daily driver for development and robot data collection.', projects: ['vla'] },
 
-  // Full-stack web
-  { id: 'js', name: 'JavaScript', category: 'web', level: 85, context: 'Interactive frontends — including this portfolio.', projects: ['algoflow'] },
-  { id: 'react', name: 'React', category: 'web', level: 84, context: 'Component-driven UIs, dashboards and this 3D site.', projects: ['algoflow'] },
-  { id: 'nextjs', name: 'Next.js', category: 'web', level: 80, context: 'Full-stack apps with SSR and API routes.', projects: ['algoflow'] },
+  // Backend & web
+  { id: 'fastapi', name: 'FastAPI', category: 'web', level: 80, context: 'Typed Python APIs and background data pipelines.', projects: ['datalens'] },
+  { id: 'rest', name: 'REST APIs', category: 'web', level: 84, context: 'API design for booking, order-status and data services.', projects: ['datalens', 'algoflow'] },
+  { id: 'postgres', name: 'PostgreSQL', category: 'web', level: 78, context: 'Relational storage, indexing and vector search.', projects: ['datalens'] },
+  { id: 'pgvector', name: 'pgvector', category: 'web', level: 72, context: 'Embedding storage with an HNSW index for semantic search.', projects: ['datalens'] },
+  { id: 'redis', name: 'Redis', category: 'web', level: 70, context: 'Job queue for background dataset import and QC.', projects: ['datalens'] },
+  { id: 'mongodb', name: 'MongoDB', category: 'web', level: 82, context: 'Document models, indexing and query optimisation.', projects: ['algoflow'] },
   { id: 'node', name: 'Node.js', category: 'web', level: 82, context: 'MERN backends serving 500+ users at PureWashr.', projects: [] },
-  { id: 'express', name: 'Express', category: 'web', level: 82, context: 'RESTful APIs and vendor-workflow integrations.', projects: [] },
-  { id: 'fastapi', name: 'FastAPI', category: 'web', level: 76, context: 'Serving ML models behind clean, typed APIs.', projects: ['ats'] },
-  { id: 'django', name: 'Django', category: 'web', level: 68, context: 'Batteries-included Python web backends.', projects: [] },
-  { id: 'mongodb', name: 'MongoDB', category: 'web', level: 82, context: 'Document data models for real-time products.', projects: ['algoflow'] },
-  { id: 'postgres', name: 'PostgreSQL', category: 'web', level: 72, context: 'Relational storage for transactional systems.', projects: [] },
+  { id: 'express', name: 'Express', category: 'web', level: 82, context: 'REST APIs and 15+ vendor-workflow integrations.', projects: [] },
+  { id: 'django', name: 'Django', category: 'web', level: 62, context: 'Batteries-included Python web backends.', projects: [] },
+  { id: 'js', name: 'JavaScript', category: 'web', level: 82, context: 'Interactive frontends — including this portfolio.', projects: ['algoflow'] },
+  { id: 'react', name: 'React', category: 'web', level: 82, context: 'Component-driven UIs, dashboards and this 3D site.', projects: ['datalens', 'algoflow'] },
+  { id: 'nextjs', name: 'Next.js', category: 'web', level: 76, context: 'Full-stack apps with API routes.', projects: ['algoflow'] },
 ]
 
 /* ------------------------------------------------------------------ */
@@ -102,48 +99,49 @@ export const skills = [
 /* ------------------------------------------------------------------ */
 
 // visual: which 3D hologram to render (see src/three/projectVisuals.jsx)
-// live: URL or null (the Live Demo button only renders when set)
+// github / live: URL or null (each button only renders when set)
 export const projects = [
   {
-    id: 'face-detect',
-    title: 'Real-Time Face Detection System',
-    short: 'Real-time computer vision system for detecting and counting faces.',
-    tech: ['Python', 'OpenCV', 'Haar Cascade', 'dlib'],
-    visual: 'face',
-    github: GITHUB, // TODO: link the repo once it's public
-    live: null,
+    id: 'datalens',
+    title: 'DataLens',
+    short: 'Data-quality platform for LLM fine-tuning datasets.',
+    tech: ['Python', 'FastAPI', 'PostgreSQL / pgvector', 'Redis', 'Docker', 'React', 'LLMs', 'Hugging Face'],
+    visual: 'data',
+    github: `${GITHUB}/datalens`,
+    live: 'https://huggingface.co/spaces/sangamyo/datalens',
     details: [
-      'Processes live webcam frames and draws tracked bounding boxes per face.',
-      'Combines Haar cascades for speed with dlib for more robust detection.',
-      'Maintains a live face count overlay for monitoring use-cases.',
-    ],
-  },
-  {
-    id: 'traffic',
-    title: 'AI Traffic Signal System (SYNCRONET-AI)',
-    short: 'Intelligent traffic intersection simulation using computer vision and adaptive signal logic.',
-    tech: ['Python', 'OpenCV', 'YOLO', 'Pygame'],
-    visual: 'traffic',
-    github: `${GITHUB}/sangamyo-sangamyo-Synchronet-Traffic-Simulation-with-stats`,
-    live: null,
-    details: [
-      'Adaptive traffic control driven by vehicle-density algorithms and real-time signal optimisation.',
-      'Detects and counts vehicles per lane, adapting green-light timing instead of fixed cycles.',
-      'Smart-traffic environment simulated in Python and Pygame to reduce congestion and improve flow.',
+      'Imports Hugging Face instruction / chat datasets and runs 8 quality checks per sample: MinHash/LSH near-duplicates, PII, refusal boilerplate, length outliers and formatting.',
+      'Natural-language search where an LLM (Gemini / Claude) outputs a validated filter object — never raw SQL — with a rule-based fallback.',
+      'Semantic search with bge-small embeddings in pgvector and an HNSW index (~6 ms top-25 queries); the live demo runs the same model in the browser.',
+      'On databricks-dolly-15k (15,011 rows): import ~7 s, QC ~15 s; found 16 exact duplicates, 9 near-duplicates and 8 PII rows. 280 pytest tests.',
     ],
   },
   {
     id: 'ats',
     title: 'ATS Resume Checker',
-    short: 'AI-powered resume analysis and job-description matching system.',
-    tech: ['Python', 'Google Gemini', 'Streamlit', 'Generative AI'],
+    short: 'LLM-powered resume analyser that scores a resume against a job description.',
+    tech: ['Python', 'Google Gemini API', 'Streamlit', 'PDF parsing'],
     visual: 'resume',
-    github: `${GITHUB}/ats-resume-checker-by-google-gemini`,
-    live: 'https://ats-resume-checker-by-google-gemini.vercel.app',
+    github: `${GITHUB}/ATS_RESUME_CHECKER_BY_GOOGLE_GEMiNI`,
+    live: 'https://atsresumecheckerbyappgeminigit-uw8c5qferlp44dqjjuas6w.streamlit.app',
     details: [
-      'ATS scoring, keyword optimisation and semantic evaluation powered by the Google Gemini API.',
-      'Compares a resume against a target job description and surfaces missing keywords.',
-      'Interactive Streamlit interface delivering real-time, actionable feedback.',
+      'Scores a resume against a job description with the Google Gemini API and reports missing keywords.',
+      'Section-level feedback, with prompt templates that return structured JSON output.',
+      'Parses uploaded PDF resumes; deployed on Streamlit.',
+    ],
+  },
+  {
+    id: 'vla',
+    title: 'Robotics / VLA Work',
+    short: 'Teleoperated robot-manipulation datasets and data-collection automation for VLA models at Addverb.',
+    tech: ['Python', 'PyTorch', 'LeRobot', 'MuJoCo', 'Bash', 'Linux'],
+    visual: 'robot',
+    github: null, // internal work at Addverb — no public repo
+    live: null,
+    details: [
+      'Built teleoperated robot-manipulation datasets used to train Vision-Language-Action (VLA) models, recorded in LeRobot dataset format.',
+      'Automated teleoperation and data-collection workflows with Bash across remote and local machines, replacing repetitive manual setup and recording steps.',
+      'Worked with MuJoCo simulation and PyTorch-based VLA training/evaluation pipelines for robotic manipulation.',
     ],
   },
   {
@@ -161,6 +159,20 @@ export const projects = [
     ],
   },
   {
+    id: 'traffic',
+    title: 'SYNCRONET-AI Traffic Signals',
+    short: 'Density-based adaptive traffic-signal simulation in Python and Pygame.',
+    tech: ['Python', 'Pygame'],
+    visual: 'traffic',
+    github: `${GITHUB}/sangamyo-sangamyo-Synchronet-Traffic-Simulation-with-stats`,
+    live: null,
+    details: [
+      'Simulates a four-way intersection — vehicles, lanes, turns and timed signals — in Python and Pygame.',
+      'Density-based adaptive signals: each green phase is lengthened according to the number of vehicles waiting at that signal.',
+      'Shows live per-direction vehicle counts and prints cumulative traffic statistics at the end of a run.',
+    ],
+  },
+  {
     id: 'hand',
     title: 'Hand Gesture Control System',
     short: 'Touchless computer control with hand gestures and voice.',
@@ -175,12 +187,26 @@ export const projects = [
     ],
   },
   {
+    id: 'face-detect',
+    title: 'Real-Time Face Detection System',
+    short: 'Real-time computer vision system for detecting and counting faces.',
+    tech: ['Python', 'OpenCV', 'Haar Cascade', 'dlib'],
+    visual: 'face',
+    github: null, // no public repo
+    live: null,
+    details: [
+      'Processes live webcam frames and draws tracked bounding boxes per face.',
+      'Combines Haar cascades for speed with dlib for more robust detection.',
+      'Maintains a live face count overlay for monitoring use-cases.',
+    ],
+  },
+  {
     id: 'assistant',
     title: 'AI Desktop Assistant',
     short: 'Voice-controlled desktop assistant.',
     tech: ['Python', 'PyQt', 'Tkinter', 'Speech Recognition'],
     visual: 'voice',
-    github: GITHUB, // TODO: link the repo once it's public
+    github: null, // no public repo
     live: null,
     details: [
       'Listens for voice commands and maps them to desktop actions.',
@@ -194,26 +220,12 @@ export const projects = [
     short: 'AI-based image style transformation project.',
     tech: ['Python', 'PyTorch', 'Computer Vision'],
     visual: 'style',
-    github: GITHUB, // TODO: link the repo once it's public
+    github: null, // no public repo
     live: null,
     details: [
       'Transforms photographs into a Ghibli-inspired illustrated style.',
       'Built on PyTorch image-to-image models.',
       'Pre- and post-processing pipeline to preserve structure and detail.',
-    ],
-  },
-  {
-    id: 'vla',
-    title: 'Robotics / VLA Work',
-    short: 'Robotics data collection, simulation, imitation learning, and VLA experimentation.',
-    tech: ['LeRobot', 'PyTorch', 'MuJoCo', 'Vision-Language-Action'],
-    visual: 'robot',
-    github: GITHUB, // TODO: link the repo once it's public
-    live: null,
-    details: [
-      'Collects teleoperated demonstration datasets with LeRobot.',
-      'Trains imitation-learning and diffusion policies, evaluated in MuJoCo.',
-      'Experiments with Vision-Language-Action models conditioned on instructions.',
     ],
   },
 ]
@@ -222,6 +234,7 @@ export const projects = [
 /* Experience timeline                                                 */
 /* ------------------------------------------------------------------ */
 
+// Oldest first: the 3D timeline runs left → right in this order.
 export const timeline = [
   {
     id: 'freelance',
@@ -230,53 +243,49 @@ export const timeline = [
     role: 'Software Developer',
     duration: 'Jun 2023 – Feb 2024',
     responsibilities: [
-      'Built production-grade authentication systems, dashboards and automation tools for multiple client-style projects.',
-      'Optimised backend logic and added caching strategies.',
+      'Built JWT-based authentication, admin dashboards and automation scripts for client projects (Node.js, Express, MongoDB).',
+      'Reduced API response time by 50% by caching frequently read endpoints.',
     ],
-    tech: ['JavaScript', 'Node.js', 'React', 'MongoDB', 'JWT / OAuth'],
-    achievements: ['Reduced API response time by 50%.'],
+    tech: ['Node.js', 'Express', 'MongoDB', 'JWT'],
+    achievements: ['50% faster API responses through endpoint caching.'],
   },
   {
     id: 'purewashr',
     kind: 'work',
     company: 'PureWashr',
     role: 'Full Stack Developer Intern',
-    duration: 'Sep 2024 – Feb 2025',
+    duration: 'Mar 2024 – Feb 2025',
     responsibilities: [
-      'Architected and deployed a scalable MERN platform with real-time scheduling and order tracking.',
-      'Engineered RESTful APIs and integrated 15+ vendor workflows.',
-      'Optimised backend performance through query optimisation and efficient API design.',
+      'Built a MERN platform (MongoDB, Express, React, Node.js) with real-time scheduling and order tracking for a Startup India recognised startup, serving 500+ active users.',
+      'Designed REST APIs and integrated 15+ vendor workflows for booking, pickup and order-status updates.',
+      'Reduced API latency by 40% through MongoDB query optimisation, indexing and leaner API responses.',
     ],
     tech: ['MongoDB', 'Express', 'React', 'Node.js', 'REST APIs'],
-    achievements: [
-      'Platform serving 500+ active users.',
-      'Reduced latency by 40%.',
-      'Helped secure INR 1L+ funding and Startup India recognition.',
-    ],
+    achievements: ['Platform serving 500+ active users.', '15+ vendor workflows integrated.', '40% lower API latency.'],
   },
   {
     id: 'addverb',
     kind: 'work',
     company: 'Addverb Technologies',
-    role: 'Robotics & AI Intern',
-    duration: 'May 2026 – Nov 2026',
+    role: 'Robotics & AI Intern · Advanced Robotics, CEO Office',
+    duration: 'May 2026 – Present',
     responsibilities: [
-      "Working in the CEO Office's Advanced Robotics department on VLA (Vision-Language-Action) data collection for robotic manipulation models.",
-      'Contributing to teleoperation pipelines and automation workflows for data collection across remote and local machines.',
-      'Supporting development of AI-driven robotic systems to advance autonomous manipulation.',
+      'Built teleoperated robot-manipulation datasets used to train Vision-Language-Action (VLA) models, recorded in LeRobot dataset format.',
+      'Automated teleoperation and data-collection workflows with Bash across remote and local machines, replacing repetitive manual setup and recording steps.',
+      'Worked with MuJoCo simulation and PyTorch-based VLA training/evaluation pipelines for robotic manipulation.',
     ],
-    tech: ['Python', 'LeRobot', 'Teleoperation', 'VLA', 'Linux'],
-    achievements: ['Building the data foundation for next-generation robot manipulation models.'],
+    tech: ['Python', 'PyTorch', 'LeRobot', 'MuJoCo', 'Bash', 'Linux'],
+    achievements: ['Robot-manipulation datasets in LeRobot format, used to train VLA models.', 'Automated data collection across remote and local machines.'],
   },
   {
     id: 'now',
     kind: 'milestone',
     company: 'Now',
-    role: 'Building intelligent embodied systems',
+    role: 'Open to work',
     duration: '2026 →',
-    responsibilities: ['Exploring Vision-Language-Action models and robot foundation models.'],
-    tech: ['VLA', 'Diffusion Policy', 'LeRobot'],
-    achievements: ['Open to AI / Robotics / Full-Stack engineering roles.'],
+    responsibilities: ['Building LLM data tooling (DataLens) and robot-learning (VLA) data.'],
+    tech: ['Python', 'FastAPI', 'LLMs', 'LeRobot'],
+    achievements: ['Available immediately — open to AI Engineer, Software Engineer and ML roles.'],
   },
 ]
 
@@ -285,12 +294,13 @@ export const timeline = [
 /* ------------------------------------------------------------------ */
 
 export const education = {
-  degree: 'B.Tech — Computer Science Engineering',
-  school: 'GL Bajaj Institute of Technology and Management',
-  university: 'Dr. A.P.J. Abdul Kalam Technical University',
+  degree: 'B.Tech — Computer Science & Engineering (lateral entry)',
+  school: 'G L Bajaj Institute of Technology & Management, Greater Noida',
+  university: 'Dr. A.P.J. Abdul Kalam Technical University (AKTU)',
   years: '2023 – 2026',
+  grade: 'CGPA 7.8/10',
   previous: [
-    { degree: 'Polytechnic Diploma — Computer Science', school: 'Board of Technical Education, Uttar Pradesh', years: '2020 – 2023' },
+    { degree: 'Diploma — Computer Science', school: 'Government Polytechnic Deeh, Unnao (BTEUP)', years: '2020 – 2023', grade: '71%' },
   ],
   certifications: [
     { name: 'Java & Problem Solving', issuer: 'ApnaCollege', badge: 'JV' },
@@ -307,7 +317,7 @@ export const domains = [
   { label: 'PYTHON', view: 'skills', focus: 'software' },
   { label: 'AI / ML', view: 'skills', focus: 'ai' },
   { label: 'COMPUTER VISION', view: 'skills', focus: 'cv' },
-  { label: 'LLMs', view: 'projects', focus: 'ats' },
+  { label: 'LLMs', view: 'projects', focus: 'datalens' },
   { label: 'ROBOTICS', view: 'experience', focus: 'addverb' },
   { label: 'VLA', view: 'projects', focus: 'vla' },
   { label: 'DEEP LEARNING', view: 'skills', focus: 'ai' },

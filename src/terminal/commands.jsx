@@ -174,7 +174,7 @@ export const commands = {
 
   whoami: {
     hidden: true,
-    run: ({ print }) => print('hariom — AI Engineer building intelligent systems.', { cls: 't-accent' }),
+    run: ({ print }) => print(`${profile.name} — AI Engineer | Software Engineer. Python backends, LLM data systems, robot-learning (VLA) data.`, { cls: 't-accent' }),
   },
 
   neofetch: {

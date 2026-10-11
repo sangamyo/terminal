@@ -114,7 +114,8 @@ export function ProjectsBlock() {
 }
 
 export function ExperienceBlock() {
-  const work = timeline.filter((t) => t.kind === 'work')
+  // newest first, like a resume
+  const work = timeline.filter((t) => t.kind === 'work').reverse()
   return (
     <Stagger className="t-kv">
       {work.map((w) => (
@@ -141,11 +142,11 @@ export function EducationBlock() {
         <span className="t-accent">{education.degree}</span>
       </Row>
       <Row>
-        {education.school} <span className="t-dim">· {education.university} · {education.years}</span>
+        {education.school} <span className="t-dim">· {education.university} · {education.years}{education.grade && ` · ${education.grade}`}</span>
       </Row>
       {education.previous?.map((e) => (
         <Row key={e.degree}>
-          {e.degree} <span className="t-dim">· {e.school} · {e.years}</span>
+          {e.degree} <span className="t-dim">· {e.school} · {e.years}{e.grade && ` · ${e.grade}`}</span>
         </Row>
       ))}
       {education.certifications.map((c) => (
@@ -192,7 +193,7 @@ const LOGO = String.raw`
 export function NeofetchBlock() {
   const rows = [
     ['Name', profile.name],
-    ['Role', 'AI Engineer · Software Developer'],
+    ['Role', 'AI Engineer · Software Engineer'],
     ['Location', profile.location],
     ['Primary Lang', profile.primaryLanguage],
     ['Main Stack', profile.mainStack],

@@ -332,7 +332,49 @@ function HandVisual() {
   )
 }
 
+function DataVisual() {
+  const stack = useRef()
+  const scan = useRef()
+  const flags = useRef([])
+  const t = useTime()
+  // sample "rows" orbiting the database; a few get flagged by the QC scan
+  const rows = Array.from({ length: 10 }, (_, i) => ({ a: (i / 10) * Math.PI * 2, y: -0.35 + (i % 5) * 0.18, bad: i % 4 === 1 }))
+  useFrame(() => {
+    stack.current.rotation.y = t.current * 0.35
+    scan.current.position.y = Math.sin(t.current * 1.4) * 0.45
+    flags.current.forEach((f, i) => {
+      if (!f) return
+      const r = rows[i]
+      const hit = r.bad && Math.abs(scan.current.position.y - r.y) < 0.12
+      f.scale.setScalar(hit ? 1.8 : 1)
+    })
+  })
+  return (
+    <group rotation={[0.45, 0, 0]}>
+      <group ref={stack}>
+        {[0.32, 0, -0.32].map((y) => (
+          <mesh key={y} position={[0, y, 0]}>
+            <cylinderGeometry args={[0.32, 0.32, 0.22, 24, 1]} />
+            <meshBasicMaterial color={neon('#22e5ff', 1.4)} wireframe toneMapped={false} />
+          </mesh>
+        ))}
+        {rows.map((r, i) => (
+          <mesh key={i} position={[Math.cos(r.a) * 0.62, r.y, Math.sin(r.a) * 0.62]} ref={(el) => (flags.current[i] = el)}>
+            <boxGeometry args={[0.07, 0.07, 0.07]} />
+            <meshBasicMaterial color={neon(r.bad ? '#c6ff3d' : '#39ff88', r.bad ? 2.6 : 1.6)} toneMapped={false} />
+          </mesh>
+        ))}
+      </group>
+      <mesh ref={scan} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.68, 0.72, 48]} />
+        <meshBasicMaterial color={neon('#22e5ff', 3)} toneMapped={false} />
+      </mesh>
+    </group>
+  )
+}
+
 export const projectVisuals = {
+  data: DataVisual,
   algo: AlgoVisual,
   hand: HandVisual,
   face: FaceVisual,

@@ -27,7 +27,7 @@ export function AboutPanel() {
           </div>
         ))}
       </dl>
-      <Chips items={['Generative AI', 'Computer Vision', 'Robot Learning', 'VLA', 'LLMs', 'Software Engineering']} />
+      <Chips items={['Python Backends', 'LLMs', 'Generative AI', 'Semantic Search', 'Robot Learning', 'VLA']} />
       <div className="actions">
         <button type="button" className="btn" onClick={() => runCommand('skills')}>
           ▸ skills
@@ -216,9 +216,11 @@ function ProjectBody({ project }) {
       <p className="panel-lead">{project.short}</p>
       <Chips items={project.tech} />
       <div className="actions">
-        <a className="btn" href={project.github} target="_blank" rel="noreferrer">
-          ⌥ GitHub
-        </a>
+        {project.github && (
+          <a className="btn" href={project.github} target="_blank" rel="noreferrer">
+            ⌥ GitHub
+          </a>
+        )}
         {project.live && (
           <a className="btn btn-cyan" href={project.live} target="_blank" rel="noreferrer">
             ▶ Live Demo
@@ -238,7 +240,7 @@ function ProjectCard({ project, index }) {
       <div className="project-card-head">
         <span className="project-id">PRJ_{String(index + 1).padStart(2, '0')}</span>
         <span className="project-glyph" aria-hidden="true">
-          {{ face: '◉', traffic: '⊕', resume: '▤', voice: '◍', style: '✦', robot: '⌬', algo: '▥', hand: '✋' }[project.visual]}
+          {{ data: '⛁', face: '◉', traffic: '⊕', resume: '▤', voice: '◍', style: '✦', robot: '⌬', algo: '▥', hand: '✋' }[project.visual]}
         </span>
       </div>
       <h3>{project.title}</h3>
@@ -291,9 +293,11 @@ export function ProjectDetails() {
               <h3 className="label">stack</h3>
               <Chips items={project.tech} />
               <div className="actions">
-                <a className="btn" href={project.github} target="_blank" rel="noreferrer">
-                  ⌥ GitHub
-                </a>
+                {project.github && (
+                  <a className="btn" href={project.github} target="_blank" rel="noreferrer">
+                    ⌥ GitHub
+                  </a>
+                )}
                 {project.live && (
                   <a className="btn btn-cyan" href={project.live} target="_blank" rel="noreferrer">
                     ▶ Live Demo
@@ -369,6 +373,7 @@ export function EducationPanel() {
       <p className="panel-role">{education.school}</p>
       <p className="panel-lead">
         {education.university} · {education.years}
+        {education.grade && ` · ${education.grade}`}
       </p>
       {education.previous?.map((e) => (
         <div key={e.degree} className="cert prev-edu">
@@ -377,6 +382,7 @@ export function EducationPanel() {
             <div className="cert-name">{e.degree}</div>
             <div className="cert-issuer">
               {e.school} · {e.years}
+              {e.grade && ` · ${e.grade}`}
             </div>
           </div>
         </div>

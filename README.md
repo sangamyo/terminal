@@ -1,6 +1,6 @@
-# hariom@portfolio:~$
+# hari-om@portfolio:~$
 
-Interactive 3D developer portfolio for **Hariom Kasaundhan**. A working terminal sits in front of a Three.js workspace.
+Interactive 3D developer portfolio for **Hari Om Kasaundhan**. A working terminal sits in front of a Three.js workspace.
 
 > Don't just read my resume. Explore my system.
 
@@ -17,11 +17,11 @@ Deploy `dist/` to any static host (Vercel, Netlify, GitHub Pages, Cloudflare Pag
 
 ## Edit your content
 
-Everything you'd want to change lives in **`src/data/profile.js`**: links, skills, projects, timeline, education and the AI-core domains. The terminal, the HTML panels and the 3D scenes all read from it. Search that file for `TODO` to find the placeholders.
+Everything you'd want to change lives in **`src/data/profile.js`**: links, skills, projects, timeline, education and the AI-core domains. The terminal, the HTML panels and the 3D scenes all read from it.
 
 - **Resume:** put your PDF at `public/resume.pdf`.
 - **Contact form:** set `contactFormEndpoint` to a Formspree (or similar) URL that accepts JSON. Leave it empty to fall back to `mailto:`.
-- **Live demos:** set a project's `live` URL to show the *Live Demo* button.
+- **Links:** set a project's `github` / `live` URL to show its *GitHub* / *Live Demo* button; leave it `null` to hide the button.
 
 ## Commands
 
