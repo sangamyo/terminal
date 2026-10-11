@@ -49,7 +49,7 @@ export const skillCategories = [
 export const skills = [
   // AI / ML
   { id: 'py-ai', name: 'Python', category: 'ai', level: 92, context: 'Primary language for backends, data pipelines and ML tooling.', projects: ['datalens', 'ats', 'vla'] },
-  { id: 'pytorch', name: 'PyTorch', category: 'ai', level: 72, context: 'PyTorch-based VLA training and evaluation pipelines at Addverb.', projects: ['vla', 'ghibli'] },
+  { id: 'pytorch', name: 'PyTorch', category: 'ai', level: 72, context: 'PyTorch-based VLA training and evaluation pipelines at Addverb.', projects: ['vla'] },
   { id: 'ml', name: 'Machine Learning', category: 'ai', level: 76, context: 'Dataset quality, evaluation and the workflow around models.', projects: ['datalens', 'ats'] },
   { id: 'dl', name: 'Deep Learning', category: 'ai', level: 72, context: 'Neural networks, transformers and embedding models.', projects: ['vla', 'ghibli'] },
   { id: 'genai', name: 'Generative AI', category: 'ai', level: 80, context: 'LLM-powered products: dataset QC, natural-language search, resume analysis.', projects: ['datalens', 'ats'] },
@@ -89,7 +89,7 @@ export const skills = [
   { id: 'node', name: 'Node.js', category: 'web', level: 82, context: 'MERN backends serving 500+ users at PureWashr.', projects: [] },
   { id: 'express', name: 'Express', category: 'web', level: 82, context: 'REST APIs and 15+ vendor-workflow integrations.', projects: [] },
   { id: 'django', name: 'Django', category: 'web', level: 62, context: 'Batteries-included Python web backends.', projects: [] },
-  { id: 'js', name: 'JavaScript', category: 'web', level: 82, context: 'Interactive frontends — including this portfolio.', projects: ['algoflow'] },
+  { id: 'js', name: 'JavaScript', category: 'web', level: 82, context: 'Interactive frontends — including this portfolio.', projects: ['algoflow', 'ghibli'] },
   { id: 'react', name: 'React', category: 'web', level: 82, context: 'Component-driven UIs, dashboards and this 3D site.', projects: ['datalens', 'algoflow'] },
   { id: 'nextjs', name: 'Next.js', category: 'web', level: 76, context: 'Full-stack apps with API routes.', projects: ['algoflow'] },
 ]
@@ -219,15 +219,16 @@ export const projects = [
   {
     id: 'ghibli',
     title: 'Ghibli Image Converter',
-    short: 'AI-based image style transformation project.',
-    tech: ['Python', 'PyTorch', 'Computer Vision'],
+    short: 'Turns photos into a Ghibli-inspired painting in the browser with a pretrained AnimeGANv3 model.',
+    tech: ['Python', 'ONNX Runtime', 'WebGPU', 'JavaScript', 'AnimeGANv3'],
     visual: 'style',
-    github: null, // no public repo
-    live: null,
+    github: `${GITHUB}/ghibli-image-converter`,
+    live: 'https://sangamyo.github.io/ghibli-image-converter/',
     details: [
-      'Transforms photographs into a Ghibli-inspired illustrated style.',
-      'Built on PyTorch image-to-image models.',
-      'Pre- and post-processing pipeline to preserve structure and detail.',
+      'Runs the pretrained AnimeGANv3 "Hayao" model (ONNX) from a Python CLI and from a static web app; photos never leave the device.',
+      'Pre/post-processing: size cap, multiple-of-8 snapping, [-1, 1] NHWC tensors, EXIF rotation, output restored to the original size.',
+      'In-browser inference with ONNX Runtime Web on WebGPU (~0.3–1 s per photo) with a WebAssembly fallback; before/after slider and PNG download.',
+      'pytest suite and GitHub Actions CI; deployed on GitHub Pages.',
     ],
   },
 ]
