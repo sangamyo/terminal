@@ -204,16 +204,17 @@ export const projects = [
   },
   {
     id: 'assistant',
-    title: 'AI Desktop Assistant',
-    short: 'Voice-controlled desktop assistant.',
-    tech: ['Python', 'PyQt', 'Tkinter', 'Speech Recognition'],
+    title: 'AI Desktop Assistant (Jarvis)',
+    short: 'Voice assistant you talk or type to, with a live web edition and a Tkinter desktop app.',
+    tech: ['Python', 'Tkinter', 'JavaScript', 'Web Speech API', 'Speech Recognition'],
     visual: 'voice',
-    github: null, // no public repo
-    live: null,
+    github: `${GITHUB}/ai-desktop-assistant`,
+    live: 'https://sangamyo.github.io/ai-desktop-assistant/',
     details: [
-      'Listens for voice commands and maps them to desktop actions.',
-      'GUI front-ends built with PyQt and Tkinter.',
-      'Handles app launching, web search and everyday automation tasks.',
+      'Understands spoken or typed requests: live weather (Open-Meteo), Wikipedia summaries, definitions, a safe calculator, timers and reminders, notes, web and YouTube search.',
+      'Desktop app (Tkinter) also launches apps, plays local music and starts hand-gesture control; voice via SpeechRecognition and pyttsx3.',
+      'Web edition runs in the browser with the Web Speech API and an animated orb that reacts to your voice.',
+      'One skill engine in Python and JavaScript, covered by pytest and node:test suites in CI.',
     ],
   },
   {
