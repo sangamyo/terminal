@@ -1,86 +1,86 @@
-import { AdaptiveDpr, Environment, Lightformer, PerformanceMonitor } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
-import { Suspense, useState } from 'react'
-import { PCFShadowMap } from 'three'
+import { AdaptiveDpr, Grid, PerformanceMonitor } from '@react-three/drei'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Suspense, useRef, useState } from 'react'
 import { useStore } from '../store/useStore'
+import AICore from './AICore'
 import CameraRig from './CameraRig'
-import Desk from './Desk'
-import Lamp from './Lamp'
-import { LEFT_WALL_X, SPOTS } from './layout'
-import Monitor from './Monitor'
-import RobotArm from './RobotArm'
-import Room from './Room'
-import { Pinboard, Shelf } from './WallPieces'
+import CommsTower from './CommsTower'
+import DomainOrbit from './DomainOrbit'
+import EducationModule from './EducationModule'
+import Effects from './Effects'
+import ParticleField from './ParticleField'
+import ProjectGallery from './ProjectGallery'
+import SkillUniverse from './SkillUniverse'
+import Timeline from './Timeline'
+import Workstation from './Workstation'
+import { focusPoint, globalPointer } from './layout'
 
-/** The studio: one room, one desk. Lazy-loaded so the page is readable before three.js arrives. */
+/** The whole 3D workspace. Lazy-loaded so the terminal is interactive before three.js arrives. */
 export default function Scene() {
   const quality = useStore((s) => s.quality)
   const setQuality = useStore((s) => s.setQuality)
-  const night = useStore((s) => s.lights === 'night')
-  const [dpr, setDpr] = useState(quality === 'high' ? [1, 2] : [1, 1.25])
+  const [dpr, setDpr] = useState(quality === 'high' ? 1.6 : 1.15)
 
   return (
     <Canvas
       className="canvas-layer"
       dpr={dpr}
-      shadows={{ type: PCFShadowMap }}
-      camera={{ position: [1.05, 1.55, 2.75], fov: 38, near: 0.02, far: 30 }}
-      gl={{ antialias: true, powerPreference: 'high-performance' }}
+      camera={{ position: [0, 0.7, 12.5], fov: 50, near: 0.1, far: 140 }}
+      gl={{ antialias: false, powerPreference: 'high-performance', stencil: false }}
       aria-hidden="true"
     >
-      <color attach="background" args={[night ? '#15161a' : '#e9e3d8']} />
+      <color attach="background" args={['#050807']} />
+      <fog attach="fog" args={['#050807', 16, 52]} />
+
       <PerformanceMonitor
         onDecline={() => {
-          setDpr([1, 1])
+          setDpr(1)
           if (useStore.getState().quality === 'high') setQuality('low')
         }}
       />
       <AdaptiveDpr pixelated={false} />
-      <Lights night={night} quality={quality} />
+
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[6, 10, 8]} intensity={0.6} color="#bfffe0" />
+      <InteractiveLight />
       <CameraRig />
+
       <Suspense fallback={null}>
-        <Room />
-        <Desk />
-        <Monitor />
-        <RobotArm />
-        <Lamp />
-        <Shelf />
-        <Pinboard />
+        <ParticleField count={quality === 'high' ? 2200 : 900} />
+        <Grid
+          position={[0, -3, 0]}
+          infiniteGrid
+          cellSize={1}
+          sectionSize={6}
+          cellThickness={0.6}
+          sectionThickness={1.1}
+          cellColor="#0d3524"
+          sectionColor="#1a7a52"
+          fadeDistance={55}
+          fadeStrength={1.4}
+          followCamera={false}
+        />
+        <AICore />
+        <DomainOrbit />
+        <Workstation />
+        <SkillUniverse />
+        <ProjectGallery />
+        <Timeline />
+        <EducationModule />
+        <CommsTower />
       </Suspense>
+
+      <Effects quality={quality} />
     </Canvas>
   )
 }
 
-function Lights({ night, quality }) {
-  const [wx, wy, wz] = SPOTS.window
-  return (
-    <>
-      <hemisphereLight args={night ? ['#3a4458', '#1b1612', 0.35] : ['#f6f0e6', '#8f7a63', 0.9]} />
-      {/* daylight (or moonlight) through the window */}
-      <directionalLight
-        position={[LEFT_WALL_X - 2.2, wy + 2.4, wz + 1.6]}
-        intensity={night ? 0.35 : 2.4}
-        color={night ? '#93a7cf' : '#fff0da'}
-        castShadow
-        shadow-mapSize={quality === 'high' ? [2048, 2048] : [1024, 1024]}
-        shadow-bias={-0.0003}
-        shadow-normalBias={0.02}
-        shadow-radius={6}
-        shadow-camera-left={-2.4}
-        shadow-camera-right={2.4}
-        shadow-camera-top={2.4}
-        shadow-camera-bottom={-2.4}
-        shadow-camera-near={0.5}
-        shadow-camera-far={12}
-      />
-      {/* soft bounce from the room in front of the desk */}
-      <pointLight position={[0.4, 2.4, 1.6]} intensity={night ? 1.1 : 3} distance={6} decay={2} color={night ? '#6b6f80' : '#fff6ea'} />
-      {/* reflections only: a window, a ceiling panel and a wall card, nothing downloaded */}
-      <Environment resolution={128} frames={1} environmentIntensity={night ? 0.25 : 0.7}>
-        <Lightformer form="rect" intensity={night ? 0.6 : 3} color={night ? '#33415c' : '#ffffff'} position={[-4, 1.6, 0]} rotation={[0, Math.PI / 2, 0]} scale={[2, 1.6, 1]} />
-        <Lightformer form="rect" intensity={night ? 0.3 : 1.2} position={[0, 4, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[4, 4, 1]} />
-        <Lightformer form="rect" intensity={night ? 0.6 : 0.5} color={night ? '#ffbe7a' : '#ffffff'} position={[2, 1, 2]} scale={[1, 1, 1]} />
-      </Environment>
-    </>
-  )
+/** A light that hovers near whatever the camera is looking at and follows the mouse. */
+function InteractiveLight() {
+  const ref = useRef()
+  useFrame(() => {
+    if (!ref.current) return
+    ref.current.position.set(focusPoint.x + globalPointer.x * 4, focusPoint.y + 2 + globalPointer.y * 2, focusPoint.z + 4)
+  })
+  return <pointLight ref={ref} intensity={18} distance={16} decay={1.6} color="#7dffd0" />
 }

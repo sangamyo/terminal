@@ -116,21 +116,33 @@ export const commands = {
   },
 
   '3d': {
-    desc: 'look around the room',
-    run: async ({ print, then, close }) => {
+    desc: 'enter the immersive 3D workspace',
+    run: async ({ print, then, args }) => {
       const s = store()
       if (s.quality === 'off') {
         if (!s.webgl) {
           print('error: WebGL is not available on this device.', { cls: 't-err' })
           return
         }
+        if (!args.includes('--force')) {
+          print('3D is disabled on this device to keep things fast.', { cls: 't-warn' })
+          print("run '3d --force' to enable it anyway.", { cls: 't-dim' })
+          return
+        }
         s.setQuality('low')
       }
-      print('drag to look around · scroll to zoom · click any object', { cls: 't-dim', speed: 4 })
-      then(() => {
-        store().setView('explore')
-        close()
-      })
+      print('> Entering 3D workspace...', { cls: 't-sys' })
+      print('drag to orbit · scroll to zoom · click an orbiting domain to fly there · Esc to exit', { cls: 't-dim', speed: 4 })
+      then(() => store().setView('immersive'))
+    },
+  },
+
+  matrix: {
+    desc: 'toggle digital rain',
+    run: async ({ print }) => {
+      const on = !store().matrix
+      store().setMatrix(on)
+      print(on ? 'Wake up, Neo… (press any key or click to exit)' : 'Back to reality.', { cls: 't-sys' })
     },
   },
 
@@ -139,20 +151,23 @@ export const commands = {
   ls: {
     desc: 'list workspace',
     run: ({ block }) =>
-      block(<LsBlock entries={['about.md', 'projects/', 'experience.log', 'skills/', 'education/', 'contact.sh', 'resume.pdf']} />),
+      block(<LsBlock entries={['about.md', 'skills/', 'projects/', 'experience.log', 'education/', 'contact.sh', 'resume.pdf']} />),
   },
 
   home: {
-    desc: 'back to the desk',
+    desc: 'return to the terminal view',
     run: async ({ print, then }) => {
-      then(() => store().setView('home'))
+      then(() => store().setView('terminal'))
       print('~', { cls: 't-dim', speed: 0 })
     },
   },
 
   exit: {
-    desc: 'close the terminal',
-    run: async ({ close }) => close(),
+    desc: 'end session',
+    run: async ({ print, then }) => {
+      print('> closing session...', { cls: 't-sys' })
+      then(() => store().setFinale(true))
+    },
   },
 
   /* ---------- easter eggs (hidden from help) ---------- */
@@ -177,6 +192,7 @@ export const commands = {
       print(`[sudo] password for visitor: `, { cls: 't-dim', speed: 0 })
       sleep(700)
       if (args.join(' ').startsWith('rm -rf')) {
+        then(() => store().triggerGlitch())
         print('nice try. this filesystem is protected by a very anxious neural network.', { cls: 't-err' })
         return
       }
@@ -197,8 +213,9 @@ export const commands = {
 
   secret: {
     hidden: true,
-    run: async ({ print, block, sleep }) => {
+    run: async ({ print, block, sleep, then }) => {
       print('> decrypting hidden partition...', { cls: 't-sys' })
+      then(() => store().triggerGlitch())
       sleep(500)
       block(<SecretBlock />)
     },

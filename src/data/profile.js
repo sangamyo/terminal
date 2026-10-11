@@ -12,6 +12,7 @@ export const profile = {
   handle: 'hari-om',
   host: 'portfolio',
   role: 'AI Engineer | Software Engineer | Robotics & VLA',
+  tagline: "Don't just read my resume. Explore my system.",
   about:
     'AI Engineer and Software Engineer (B.Tech CSE 2026) building Python backends and LLM-powered data systems with FastAPI, PostgreSQL, embeddings and semantic search. Currently a Robotics & AI Intern at Addverb Technologies, building robot-learning (VLA) datasets with LeRobot, MuJoCo and PyTorch.',
   location: 'Greater Noida / Noida, India',
@@ -36,11 +37,11 @@ export const profile = {
 /* ------------------------------------------------------------------ */
 
 export const skillCategories = [
-  { id: 'ai', label: 'AI / ML', color: '#3f7d63' },
-  { id: 'web', label: 'Backend & Web', color: '#b4532a' },
-  { id: 'software', label: 'Software', color: '#3e5c8a' },
-  { id: 'robotics', label: 'Robotics', color: '#8a6a1f' },
-  { id: 'cv', label: 'Computer Vision', color: '#7a4f7a' },
+  { id: 'ai', label: 'AI / ML', color: '#39ff88' },
+  { id: 'cv', label: 'Computer Vision', color: '#22e5ff' },
+  { id: 'robotics', label: 'Robotics', color: '#c6ff3d' },
+  { id: 'software', label: 'Software', color: '#7aa2ff' },
+  { id: 'web', label: 'Backend & Web', color: '#b18cff' },
 ]
 
 // level: 0–100 (self-assessed). context: one line shown in the hover panel.
@@ -97,7 +98,7 @@ export const skills = [
 /* Projects                                                            */
 /* ------------------------------------------------------------------ */
 
-// shot: screenshot in public/shots shown on the desk monitor (projects without one get a typeset title card)
+// visual: which 3D hologram to render (see src/three/projectVisuals.jsx)
 // github / live: URL or null (each button only renders when set)
 export const projects = [
   {
@@ -105,7 +106,7 @@ export const projects = [
     title: 'DataLens',
     short: 'Data-quality platform for LLM fine-tuning datasets.',
     tech: ['Python', 'FastAPI', 'PostgreSQL / pgvector', 'Redis', 'Docker', 'React', 'LLMs', 'Hugging Face'],
-    shot: 'shots/datalens.jpg',
+    visual: 'data',
     github: `${GITHUB}/datalens`,
     live: 'https://huggingface.co/spaces/sangamyo/datalens',
     details: [
@@ -120,6 +121,7 @@ export const projects = [
     title: 'ATS Resume Checker',
     short: 'LLM-powered resume analyser that scores a resume against a job description.',
     tech: ['Python', 'Google Gemini API', 'Streamlit', 'PDF parsing'],
+    visual: 'resume',
     github: `${GITHUB}/ATS_RESUME_CHECKER_BY_GOOGLE_GEMiNI`,
     live: 'https://atsresumecheckerbyappgeminigit-uw8c5qferlp44dqjjuas6w.streamlit.app',
     details: [
@@ -133,6 +135,7 @@ export const projects = [
     title: 'Robotics / VLA Work',
     short: 'Teleoperated robot-manipulation datasets and data-collection automation for VLA models at Addverb.',
     tech: ['Python', 'PyTorch', 'LeRobot', 'MuJoCo', 'Bash', 'Linux'],
+    visual: 'robot',
     github: null, // internal work at Addverb — no public repo
     live: null,
     details: [
@@ -146,6 +149,7 @@ export const projects = [
     title: 'AlgoFlow Tracker',
     short: 'Full-stack DSA analytics platform with real-time progress tracking.',
     tech: ['Next.js', 'MongoDB', 'REST APIs', 'Auth'],
+    visual: 'algo',
     github: `${GITHUB}/AlgoFlow-tracker`,
     live: 'https://algo-flow-tracker.vercel.app',
     details: [
@@ -159,7 +163,7 @@ export const projects = [
     title: 'SYNCRONET-AI Traffic Signals',
     short: 'Density-based adaptive traffic-signal simulation in Python and Pygame.',
     tech: ['Python', 'Pygame', 'asyncio', 'WebAssembly'],
-    shot: 'shots/traffic.jpg',
+    visual: 'traffic',
     github: `${GITHUB}/sangamyo-sangamyo-Synchronet-Traffic-Simulation-with-stats`,
     live: 'https://sangamyo.github.io/sangamyo-sangamyo-Synchronet-Traffic-Simulation-with-stats/',
     details: [
@@ -174,7 +178,7 @@ export const projects = [
     title: 'Hand Gesture Control System',
     short: 'Touchless computer control with hand gestures and voice.',
     tech: ['Python', 'OpenCV', 'MediaPipe', 'PyAutoGUI', 'Speech Recognition'],
-    shot: 'shots/hand.jpg',
+    visual: 'hand',
     github: `${GITHUB}/control_with_hand_gesture`,
     live: 'https://sangamyo.github.io/control_with_hand_gesture/',
     details: [
@@ -189,6 +193,7 @@ export const projects = [
     title: 'Real-Time Face Detection System',
     short: 'Real-time computer vision system for detecting and counting faces.',
     tech: ['Python', 'OpenCV', 'Haar Cascade', 'dlib'],
+    visual: 'face',
     github: null, // no public repo
     live: null,
     details: [
@@ -202,6 +207,7 @@ export const projects = [
     title: 'AI Desktop Assistant',
     short: 'Voice-controlled desktop assistant.',
     tech: ['Python', 'PyQt', 'Tkinter', 'Speech Recognition'],
+    visual: 'voice',
     github: null, // no public repo
     live: null,
     details: [
@@ -215,7 +221,7 @@ export const projects = [
     title: 'Ghibli Image Converter',
     short: 'Turns photos into a Ghibli-inspired painting in the browser with a pretrained AnimeGANv3 model.',
     tech: ['Python', 'ONNX Runtime', 'WebGPU', 'JavaScript', 'AnimeGANv3'],
-    shot: 'shots/ghibli.jpg',
+    visual: 'style',
     github: `${GITHUB}/ghibli-image-converter`,
     live: 'https://sangamyo.github.io/ghibli-image-converter/',
     details: [
@@ -305,6 +311,21 @@ export const education = {
     { name: 'Programming in C', issuer: 'Infosys Springboard', badge: 'C' },
   ],
 }
+
+/* ------------------------------------------------------------------ */
+/* AI Core orbit domains → where clicking them takes the camera        */
+/* ------------------------------------------------------------------ */
+
+export const domains = [
+  { label: 'PYTHON', view: 'skills', focus: 'software' },
+  { label: 'AI / ML', view: 'skills', focus: 'ai' },
+  { label: 'COMPUTER VISION', view: 'skills', focus: 'cv' },
+  { label: 'LLMs', view: 'projects', focus: 'datalens' },
+  { label: 'ROBOTICS', view: 'experience', focus: 'addverb' },
+  { label: 'VLA', view: 'projects', focus: 'vla' },
+  { label: 'DEEP LEARNING', view: 'skills', focus: 'ai' },
+  { label: 'SOFTWARE ENGINEERING', view: 'projects', focus: 'algoflow' },
+]
 
 export const getProject = (id) => projects.find((p) => p.id === id)
 export const getCategory = (id) => skillCategories.find((c) => c.id === id)

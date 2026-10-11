@@ -6,7 +6,7 @@ export function detectQuality() {
   const small = Math.min(window.innerWidth, window.innerHeight) < 600
   const cores = navigator.hardwareConcurrency || 4
   const memory = navigator.deviceMemory || 8
-  // Phones get the simple page; the 3D desk can still be opened from the top bar.
+  // Phones keep the terminal-first experience; 3D can still be enabled manually.
   if (coarse && small) return 'off'
   if (coarse || cores <= 4 || memory <= 4) return 'low'
   return 'high'
