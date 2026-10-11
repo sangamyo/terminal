@@ -373,7 +373,105 @@ function DataVisual() {
   )
 }
 
+function RagVisual() {
+  const chunks = useRef([])
+  const bubble = useRef()
+  const t = useTime()
+  // one retrieved chunk per content type the pipeline reads: text, table, chart
+  const kinds = [
+    { from: [-0.42, 0.27, 0.02], color: '#5cf2c8' },
+    { from: [-0.42, -0.04, 0.02], color: '#6cb8ff' },
+    { from: [-0.42, -0.32, 0.02], color: '#ffb86b' },
+  ]
+  const to = [0.5, 0.2, 0.04]
+  useFrame(() => {
+    let arriving = 0
+    chunks.current.forEach((c, i) => {
+      if (!c) return
+      const k = kinds[i]
+      const p = (t.current * 0.4 + i / kinds.length) % 1
+      const e = p * p * (3 - 2 * p)
+      const lift = Math.sin(p * Math.PI)
+      c.position.set(
+        k.from[0] + (to[0] - k.from[0]) * e,
+        k.from[1] + (to[1] - k.from[1]) * e + lift * 0.16,
+        k.from[2] + (to[2] - k.from[2]) * e + lift * 0.18,
+      )
+      c.scale.setScalar(1 - 0.55 * e)
+      if (p > 0.85) arriving = Math.max(arriving, (p - 0.85) / 0.15)
+    })
+    bubble.current.scale.setScalar(1 + arriving * 0.06)
+  })
+  return (
+    <group rotation={[0, -0.2, 0]}>
+      {/* PDF page: text lines, a small table and a bar chart */}
+      <group position={[-0.42, 0, 0]}>
+        <mesh>
+          <planeGeometry args={[0.7, 0.95]} />
+          <meshBasicMaterial color="#0e142b" transparent opacity={0.92} />
+        </mesh>
+        {[0.37, 0.3, 0.24, 0.18].map((y, j) => (
+          <mesh key={y} position={[-0.27 + (j === 0 ? 0.3 : 0.5 - j * 0.06) / 2, y, 0.001]}>
+            <planeGeometry args={[j === 0 ? 0.3 : 0.5 - j * 0.06, 0.03]} />
+            <meshBasicMaterial color={neon(j === 0 ? '#5cf2c8' : '#8a93b8', j === 0 ? 2 : 1)} toneMapped={false} />
+          </mesh>
+        ))}
+        {[0.06, -0.02, -0.1].map((y) => (
+          <mesh key={y} position={[0, y, 0.001]}>
+            <planeGeometry args={[0.52, 0.008]} />
+            <meshBasicMaterial color={neon('#6cb8ff', 1.4)} toneMapped={false} />
+          </mesh>
+        ))}
+        {[-0.26, -0.09, 0.09, 0.26].map((x) => (
+          <mesh key={x} position={[x, -0.02, 0.001]}>
+            <planeGeometry args={[0.008, 0.16]} />
+            <meshBasicMaterial color={neon('#6cb8ff', 1.4)} toneMapped={false} />
+          </mesh>
+        ))}
+        {[0.08, 0.14, 0.11, 0.19].map((h, j) => (
+          <mesh key={j} position={[-0.18 + j * 0.12, -0.4 + h / 2, 0.001]}>
+            <planeGeometry args={[0.07, h]} />
+            <meshBasicMaterial color={neon('#ffb86b', 1.8)} toneMapped={false} />
+          </mesh>
+        ))}
+      </group>
+      {/* retrieved chunks flying to the answer */}
+      {kinds.map((k, i) => (
+        <mesh key={i} position={k.from} ref={(el) => (chunks.current[i] = el)}>
+          <boxGeometry args={[0.09, 0.09, 0.09]} />
+          <meshBasicMaterial color={neon(k.color, 2.4)} toneMapped={false} />
+        </mesh>
+      ))}
+      {/* chat answer with a page citation */}
+      <group ref={bubble} position={[0.5, 0.2, 0]}>
+        <mesh position={[0, 0, -0.002]}>
+          <planeGeometry args={[0.64, 0.4]} />
+          <meshBasicMaterial color={neon('#5cf2c8', 1.2)} toneMapped={false} />
+        </mesh>
+        <mesh>
+          <planeGeometry args={[0.6, 0.36]} />
+          <meshBasicMaterial color="#0e142b" />
+        </mesh>
+        {[0.08, 0, -0.08].map((y, j) => (
+          <mesh key={y} position={[-0.24 + (0.42 - j * 0.1) / 2, y, 0.001]}>
+            <planeGeometry args={[0.42 - j * 0.1, 0.028]} />
+            <meshBasicMaterial color={neon('#8a93b8', 1)} toneMapped={false} />
+          </mesh>
+        ))}
+        <mesh position={[-0.2, -0.2, 0]} rotation={[0, 0, Math.PI]}>
+          <circleGeometry args={[0.05, 3]} />
+          <meshBasicMaterial color={neon('#5cf2c8', 1.2)} toneMapped={false} />
+        </mesh>
+      </group>
+      <Text font={FONT_MONO} fontSize={0.075} position={[0.5, -0.12, 0]} color="#5cf2c8" anchorX="center">
+        [p. 2]
+      </Text>
+    </group>
+  )
+}
+
 export const projectVisuals = {
+  rag: RagVisual,
   data: DataVisual,
   algo: AlgoVisual,
   hand: HandVisual,

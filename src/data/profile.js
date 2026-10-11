@@ -48,13 +48,13 @@ export const skillCategories = [
 // projects: ids from the `projects` array below.
 export const skills = [
   // AI / ML
-  { id: 'py-ai', name: 'Python', category: 'ai', level: 92, context: 'Primary language for backends, data pipelines and ML tooling.', projects: ['datalens', 'ats', 'vla'] },
+  { id: 'py-ai', name: 'Python', category: 'ai', level: 92, context: 'Primary language for backends, data pipelines and ML tooling.', projects: ['datalens', 'ats', 'vla', 'pdfrag'] },
   { id: 'pytorch', name: 'PyTorch', category: 'ai', level: 72, context: 'PyTorch-based VLA training and evaluation pipelines at Addverb.', projects: ['vla'] },
   { id: 'ml', name: 'Machine Learning', category: 'ai', level: 76, context: 'Dataset quality, evaluation and the workflow around models.', projects: ['datalens', 'ats'] },
   { id: 'dl', name: 'Deep Learning', category: 'ai', level: 72, context: 'Neural networks, transformers and embedding models.', projects: ['vla', 'ghibli'] },
-  { id: 'genai', name: 'Generative AI', category: 'ai', level: 80, context: 'LLM-powered products: dataset QC, natural-language search, resume analysis.', projects: ['datalens', 'ats'] },
-  { id: 'llms', name: 'LLMs', category: 'ai', level: 80, context: 'Gemini / Claude APIs, prompt templates and validated structured output.', projects: ['datalens', 'ats'] },
-  { id: 'embeddings', name: 'Embeddings / Semantic Search', category: 'ai', level: 74, context: 'bge-small embeddings in pgvector with an HNSW index (~6 ms top-25 queries).', projects: ['datalens'] },
+  { id: 'genai', name: 'Generative AI', category: 'ai', level: 80, context: 'LLM-powered products: dataset QC, natural-language search, resume analysis.', projects: ['datalens', 'ats', 'pdfrag'] },
+  { id: 'llms', name: 'LLMs', category: 'ai', level: 80, context: 'Gemini / Claude APIs, prompt templates and validated structured output.', projects: ['datalens', 'ats', 'pdfrag'] },
+  { id: 'embeddings', name: 'Embeddings / Semantic Search', category: 'ai', level: 74, context: 'bge-small embeddings in pgvector with an HNSW index (~6 ms top-25 queries).', projects: ['datalens', 'pdfrag'] },
   { id: 'hf', name: 'Hugging Face', category: 'ai', level: 74, context: 'Importing instruction / chat datasets and running embedding models.', projects: ['datalens'] },
 
   // Computer Vision
@@ -114,6 +114,21 @@ export const projects = [
       'Natural-language search where an LLM (Gemini / Claude) outputs a validated filter object — never raw SQL — with a rule-based fallback.',
       'Semantic search with bge-small embeddings in pgvector and an HNSW index (~6 ms top-25 queries); the live demo runs the same model in the browser.',
       'On databricks-dolly-15k (15,011 rows): import ~7 s, QC ~15 s; found 16 exact duplicates, 9 near-duplicates and 8 PII rows. 280 pytest tests.',
+    ],
+  },
+  {
+    id: 'pdfrag',
+    title: 'PDF RAG Chat',
+    short: 'Chatbot that answers questions from the text, tables, charts and images inside PDFs, with page citations.',
+    tech: ['Python', 'Groq (Qwen 3.8)', 'PyMuPDF', 'fastembed', 'BM25', 'Streamlit'],
+    visual: 'rag',
+    github: `${GITHUB}/pdf-rag-chat`,
+    live: 'https://pdf-rag-chat-hariom.streamlit.app',
+    details: [
+      'Extracts body text, tables (as Markdown) and figures from PDFs with PyMuPDF, including vector-drawn charts, which are cropped with their axis labels and captions.',
+      'A vision LLM describes every chart and image at ingest, including a table of the data values it reads, so charts become searchable text.',
+      'Hybrid retrieval: bge-small embeddings (fastembed / ONNX) plus BM25 keyword search, merged with reciprocal rank fusion.',
+      'Streams answers with [p. N] page citations from Groq (Claude optional); ingest is cached by file hash and deployed on Streamlit Cloud.',
     ],
   },
   {
