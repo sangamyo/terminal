@@ -29,8 +29,8 @@ export default function Scene() {
       gl={{ antialias: false, powerPreference: 'high-performance', stencil: false }}
       aria-hidden="true"
     >
-      <color attach="background" args={['#050807']} />
-      <fog attach="fog" args={['#050807', 16, 52]} />
+      <color attach="background" args={['#05060d']} />
+      <fog attach="fog" args={['#05060d', 16, 52]} />
 
       <PerformanceMonitor
         onDecline={() => {
@@ -41,7 +41,7 @@ export default function Scene() {
       <AdaptiveDpr pixelated={false} />
 
       <ambientLight intensity={0.35} />
-      <directionalLight position={[6, 10, 8]} intensity={0.6} color="#bfffe0" />
+      <directionalLight position={[6, 10, 8]} intensity={0.6} color="#c8d6ff" />
       <InteractiveLight />
       <CameraRig />
 
@@ -54,8 +54,8 @@ export default function Scene() {
           sectionSize={6}
           cellThickness={0.6}
           sectionThickness={1.1}
-          cellColor="#0d3524"
-          sectionColor="#1a7a52"
+          cellColor="#151d45"
+          sectionColor="#34489e"
           fadeDistance={55}
           fadeStrength={1.4}
           followCamera={false}
@@ -82,5 +82,5 @@ function InteractiveLight() {
     if (!ref.current) return
     ref.current.position.set(focusPoint.x + globalPointer.x * 4, focusPoint.y + 2 + globalPointer.y * 2, focusPoint.z + 4)
   })
-  return <pointLight ref={ref} intensity={18} distance={16} decay={1.6} color="#7dffd0" />
+  return <pointLight ref={ref} intensity={18} distance={16} decay={1.6} color="#9fc8ff" />
 }

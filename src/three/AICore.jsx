@@ -49,8 +49,8 @@ export default function AICore() {
     () => ({
       uTime: { value: 0 },
       uPulse: { value: 0 },
-      uA: { value: new Color('#0aff7a') },
-      uB: { value: new Color('#19d9ff') },
+      uA: { value: new Color('#3ee6b8') },
+      uB: { value: new Color('#4ea6ff') },
     }),
     [],
   )
@@ -92,19 +92,19 @@ export default function AICore() {
       {/* inner bright seed */}
       <mesh scale={0.45}>
         <sphereGeometry args={[1, 24, 24]} />
-        <meshBasicMaterial color={neon('#b9ffe0', 3)} toneMapped={false} />
+        <meshBasicMaterial color={neon('#c4d2ff', 3)} toneMapped={false} />
       </mesh>
 
       <mesh ref={shell}>
         <icosahedronGeometry args={[1.85, 1]} />
-        <meshBasicMaterial color={neon('#22e5ff', 1.4)} wireframe transparent opacity={0.35} toneMapped={false} />
+        <meshBasicMaterial color={neon('#6cb8ff', 1.4)} wireframe transparent opacity={0.35} toneMapped={false} />
       </mesh>
 
       <group ref={rings}>
         {[
-          [2.45, [Math.PI / 2.2, 0, 0], '#39ff88'],
-          [2.75, [Math.PI / 3, Math.PI / 5, 0], '#22e5ff'],
-          [3.05, [Math.PI / 1.7, -Math.PI / 6, 0], '#39ff88'],
+          [2.45, [Math.PI / 2.2, 0, 0], '#5cf2c8'],
+          [2.75, [Math.PI / 3, Math.PI / 5, 0], '#6cb8ff'],
+          [3.05, [Math.PI / 1.7, -Math.PI / 6, 0], '#5cf2c8'],
         ].map(([r, rot, c], i) => (
           <mesh key={i} rotation={rot}>
             <torusGeometry args={[r, 0.011, 6, 180]} />
@@ -113,7 +113,7 @@ export default function AICore() {
         ))}
       </group>
 
-      <pointLight color="#39ff88" intensity={25} distance={14} decay={1.8} />
+      <pointLight color="#5cf2c8" intensity={25} distance={14} decay={1.8} />
     </group>
   )
 }

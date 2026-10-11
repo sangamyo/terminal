@@ -26,7 +26,7 @@ const pathFragment = /* glsl */ `
 /** Career timeline: a glowing path with expandable milestone nodes. */
 export default function Timeline() {
   const uniforms = useMemo(
-    () => ({ uTime: { value: 0 }, uA: { value: new Color('#22e5ff') }, uB: { value: new Color('#39ff88') } }),
+    () => ({ uTime: { value: 0 }, uA: { value: new Color('#6cb8ff') }, uB: { value: new Color('#5cf2c8') } }),
     [],
   )
   const curve = useMemo(() => {
@@ -48,7 +48,7 @@ export default function Timeline() {
       </mesh>
       <mesh>
         <tubeGeometry args={[curve, 220, 0.16, 8, false]} />
-        <meshBasicMaterial color={neon('#22e5ff', 0.6)} transparent opacity={0.08} blending={AdditiveBlending} depthWrite={false} toneMapped={false} />
+        <meshBasicMaterial color={neon('#6cb8ff', 0.6)} transparent opacity={0.08} blending={AdditiveBlending} depthWrite={false} toneMapped={false} />
       </mesh>
       {timeline.map((t, i) => (
         <TimelineNode key={t.id} item={t} index={i} />
@@ -64,7 +64,7 @@ function TimelineNode({ item, index }) {
   const [hovered, setHovered] = useState(false)
   const selected = useStore((s) => s.timelineIndex === index)
   const isWork = item.kind === 'work'
-  const color = isWork ? '#39ff88' : '#22e5ff'
+  const color = isWork ? '#5cf2c8' : '#6cb8ff'
 
   useFrame((state, dt) => {
     ring.current.rotation.z += dt * (selected ? 1.6 : 0.5)
@@ -107,11 +107,11 @@ function TimelineNode({ item, index }) {
         <Text font={FONT_MONO} fontSize={0.15} position={[0, 0.62, 0]} color={neon(color, 1.4)} anchorY="bottom">
           {item.duration}
         </Text>
-        <Text font={FONT_MONO} fontSize={0.17} position={[0, -0.55, 0]} color="#eafff4" anchorY="top" maxWidth={3} textAlign="center">
+        <Text font={FONT_MONO} fontSize={0.17} position={[0, -0.55, 0]} color="#eef1ff" anchorY="top" maxWidth={3} textAlign="center">
           {isWork ? item.company : item.role}
         </Text>
         {isWork && (
-          <Text font={FONT_MONO} fontSize={0.12} position={[0, -0.82, 0]} color="#8fb3a3" anchorY="top">
+          <Text font={FONT_MONO} fontSize={0.12} position={[0, -0.82, 0]} color="#9aa4c8" anchorY="top">
             {item.role}
           </Text>
         )}

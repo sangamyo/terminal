@@ -47,7 +47,7 @@
   font-weight: 700;
   font-size: 13px;
   text-shadow: var(--glow-green);
-  background: rgba(57, 255, 136, 0.06);
+  background: rgba(92, 242, 200, 0.06);
 }
 
 .brand-text {
@@ -88,12 +88,12 @@
 
 .nav-item:hover {
   color: var(--text);
-  background: rgba(57, 255, 136, 0.06);
+  background: rgba(92, 242, 200, 0.06);
 }
 
 .nav-item.is-active {
   color: var(--green);
-  background: rgba(57, 255, 136, 0.1);
+  background: rgba(92, 242, 200, 0.1);
   text-shadow: var(--glow-green);
 }
 
@@ -118,7 +118,7 @@
 .toggle.is-on {
   color: var(--green);
   border-color: var(--line-strong);
-  box-shadow: inset 0 0 12px rgba(57, 255, 136, 0.12);
+  box-shadow: inset 0 0 12px rgba(92, 242, 200, 0.12);
 }
 
 /* ---------------- section panel ---------------- */
@@ -177,7 +177,7 @@
   padding: 18px 20px 22px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(57, 255, 136, 0.3) transparent;
+  scrollbar-color: rgba(92, 242, 200, 0.3) transparent;
 }
 
 .panel-kicker {
@@ -486,8 +486,8 @@
   border-radius: 12px;
   border: 1px solid var(--line);
   background:
-    repeating-linear-gradient(to bottom, rgba(34, 229, 255, 0.025) 0 1px, transparent 1px 4px),
-    linear-gradient(160deg, rgba(34, 229, 255, 0.06), transparent 60%);
+    repeating-linear-gradient(to bottom, rgba(108, 184, 255, 0.025) 0 1px, transparent 1px 4px),
+    linear-gradient(160deg, rgba(108, 184, 255, 0.06), transparent 60%);
   transition:
     border-color 0.25s,
     box-shadow 0.25s,
@@ -547,7 +547,7 @@
   display: grid;
   place-items: center;
   padding: var(--gutter);
-  background: rgba(2, 5, 4, 0.6);
+  background: rgba(2, 3, 8, 0.6);
   backdrop-filter: blur(4px);
 }
 
@@ -647,8 +647,8 @@
   align-items: center;
   padding: 12px;
   border-radius: 10px;
-  border: 1px solid rgba(198, 255, 61, 0.25);
-  background: rgba(198, 255, 61, 0.04);
+  border: 1px solid rgba(255, 184, 107, 0.25);
+  background: rgba(255, 184, 107, 0.04);
 }
 
 .cert-badge {
@@ -658,7 +658,7 @@
   height: 42px;
   flex: none;
   clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0 50%);
-  background: rgba(198, 255, 61, 0.15);
+  background: rgba(255, 184, 107, 0.15);
   color: var(--lime);
   font-weight: 700;
   font-size: 13px;
@@ -729,12 +729,12 @@
 .form textarea:focus {
   outline: none;
   border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(57, 255, 136, 0.12);
+  box-shadow: 0 0 0 3px rgba(92, 242, 200, 0.12);
 }
 
 .form input::placeholder,
 .form textarea::placeholder {
-  color: #4a6157;
+  color: #535b7c;
 }
 
 .form .btn {
@@ -777,7 +777,7 @@
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 0%, #0b1a14 0%, var(--bg) 60%);
+  background: radial-gradient(ellipse at 50% 0%, #0d1226 0%, var(--bg) 60%);
 }
 
 .has-3d .lite-bg {
@@ -793,7 +793,7 @@
   height: 70vmin;
   translate: -50% -50%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(57, 255, 136, 0.16), rgba(34, 229, 255, 0.06) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(92, 242, 200, 0.16), rgba(108, 184, 255, 0.06) 40%, transparent 70%);
   filter: blur(20px);
   animation: breathe 6s ease-in-out infinite;
 }
@@ -812,8 +812,8 @@
   bottom: -10%;
   height: 60%;
   background-image:
-    linear-gradient(rgba(57, 255, 136, 0.18) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(57, 255, 136, 0.18) 1px, transparent 1px);
+    linear-gradient(rgba(92, 242, 200, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(92, 242, 200, 0.18) 1px, transparent 1px);
   background-size: 48px 48px;
   transform: perspective(500px) rotateX(62deg);
   transform-origin: top center;
@@ -895,7 +895,7 @@
   pointer-events: none;
   animation: glitch 0.6s steps(6) forwards;
   background:
-    linear-gradient(transparent 40%, rgba(34, 229, 255, 0.12) 40% 43%, transparent 43% 70%, rgba(57, 255, 136, 0.12) 70% 72%, transparent 72%);
+    linear-gradient(transparent 40%, rgba(108, 184, 255, 0.12) 40% 43%, transparent 43% 70%, rgba(92, 242, 200, 0.12) 70% 72%, transparent 72%);
   mix-blend-mode: screen;
 }
 
@@ -947,7 +947,7 @@
   display: grid;
   place-items: center;
   padding: var(--gutter);
-  background: rgba(2, 5, 4, 0.72);
+  background: rgba(2, 3, 8, 0.72);
   backdrop-filter: blur(6px);
 }
 
@@ -968,7 +968,7 @@
   font-size: clamp(26px, 4vw, 36px);
   line-height: 1.1;
   color: #fff;
-  text-shadow: 0 0 24px rgba(57, 255, 136, 0.4);
+  text-shadow: 0 0 24px rgba(92, 242, 200, 0.4);
 }
 
 .finale-actions {
@@ -1024,12 +1024,12 @@
 
 .prev-edu {
   margin-bottom: 4px;
-  border-color: rgba(34, 229, 255, 0.25);
-  background: rgba(34, 229, 255, 0.04);
+  border-color: rgba(108, 184, 255, 0.25);
+  background: rgba(108, 184, 255, 0.04);
 }
 
 .prev-edu .cert-badge {
   color: var(--cyan);
-  background: rgba(34, 229, 255, 0.15);
+  background: rgba(108, 184, 255, 0.15);
   font-size: 11px;
 }

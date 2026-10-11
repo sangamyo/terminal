@@ -33,29 +33,29 @@ export default function CommsTower() {
     >
       <mesh position={[0, -1.2, 0]}>
         <cylinderGeometry args={[0.05, 0.18, 2.6, 12]} />
-        <meshStandardMaterial color="#13221d" metalness={0.8} roughness={0.3} />
+        <meshStandardMaterial color="#151a2e" metalness={0.8} roughness={0.3} />
       </mesh>
       <group ref={dish} position={[0, 0.25, 0]}>
         <mesh rotation={[-0.5, 0, 0]}>
           <sphereGeometry args={[0.9, 32, 12, 0, Math.PI * 2, 0, 0.9]} />
-          <meshBasicMaterial color={neon('#22e5ff', 1.4)} wireframe toneMapped={false} />
+          <meshBasicMaterial color={neon('#6cb8ff', 1.4)} wireframe toneMapped={false} />
         </mesh>
         <mesh position={[0, 0.2, 0.35]}>
           <sphereGeometry args={[0.08, 16, 16]} />
-          <meshBasicMaterial color={neon('#39ff88', 3)} toneMapped={false} />
+          <meshBasicMaterial color={neon('#5cf2c8', 3)} toneMapped={false} />
         </mesh>
       </group>
       {[0, 1, 2].map((i) => (
         <mesh key={i} ref={(el) => (waves.current[i] = el)} position={[0, 0.4, 0]} rotation={[Math.PI / 2, 0, 0]}>
           <torusGeometry args={[1, 0.012, 6, 120]} />
-          <meshBasicMaterial color={neon('#39ff88', 2.2)} transparent toneMapped={false} blending={AdditiveBlending} depthWrite={false} />
+          <meshBasicMaterial color={neon('#5cf2c8', 2.2)} transparent toneMapped={false} blending={AdditiveBlending} depthWrite={false} />
         </mesh>
       ))}
       <Billboard position={[0, 2.1, 0]}>
-        <Text font={FONT_MONO} fontSize={0.22} letterSpacing={0.14} color={neon('#eafff4', 1.4)}>
+        <Text font={FONT_MONO} fontSize={0.22} letterSpacing={0.14} color={neon('#eef1ff', 1.4)}>
           ESTABLISH CONNECTION
         </Text>
-        <Text font={FONT_MONO} fontSize={0.11} position={[0, -0.28, 0]} color={neon('#39ff88', 1.3)}>
+        <Text font={FONT_MONO} fontSize={0.11} position={[0, -0.28, 0]} color={neon('#5cf2c8', 1.3)}>
           ▲ signal strong · channel open
         </Text>
       </Billboard>

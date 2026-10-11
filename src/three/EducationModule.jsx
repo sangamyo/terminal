@@ -30,26 +30,26 @@ export default function EducationModule() {
         >
           <mesh>
             <cylinderGeometry args={[1.1, 1.1, 2.2, 6, 1]} />
-            <meshStandardMaterial color="#071a12" emissive="#0b4a2f" emissiveIntensity={0.6} metalness={0.6} roughness={0.25} transparent opacity={0.85} />
+            <meshStandardMaterial color="#0b1024" emissive="#1c2a66" emissiveIntensity={0.6} metalness={0.6} roughness={0.25} transparent opacity={0.85} />
           </mesh>
           <mesh scale={1.02}>
             <cylinderGeometry args={[1.1, 1.1, 2.2, 6, 4]} />
-            <meshBasicMaterial color={neon('#39ff88', 1.8)} wireframe toneMapped={false} />
+            <meshBasicMaterial color={neon('#5cf2c8', 1.8)} wireframe toneMapped={false} />
           </mesh>
           <mesh position={[0, 1.55, 0]}>
             <coneGeometry args={[1.1, 0.9, 6]} />
-            <meshBasicMaterial color={neon('#22e5ff', 1.4)} wireframe toneMapped={false} />
+            <meshBasicMaterial color={neon('#6cb8ff', 1.4)} wireframe toneMapped={false} />
           </mesh>
           <mesh position={[0, -1.55, 0]} rotation={[Math.PI, 0, 0]}>
             <coneGeometry args={[1.1, 0.9, 6]} />
-            <meshBasicMaterial color={neon('#22e5ff', 1.4)} wireframe toneMapped={false} />
+            <meshBasicMaterial color={neon('#6cb8ff', 1.4)} wireframe toneMapped={false} />
           </mesh>
         </group>
         <Billboard position={[0, 0, 1.5]}>
           <Text font={FONT_DISPLAY} fontSize={0.38} color={neon('#ffffff', 1.3)} anchorY="bottom">
             B.TECH · CSE
           </Text>
-          <Text font={FONT_MONO} fontSize={0.15} color={neon('#39ff88', 1.4)} position={[0, -0.12, 0]} anchorY="top">
+          <Text font={FONT_MONO} fontSize={0.15} color={neon('#5cf2c8', 1.4)} position={[0, -0.12, 0]} anchorY="top">
             {education.years}
           </Text>
         </Billboard>
@@ -62,16 +62,16 @@ export default function EducationModule() {
             <Billboard key={c.name} position={[Math.cos(a) * 2.6, Math.sin(a * 2) * 0.5 - 0.3, Math.sin(a) * 2.6]}>
               <mesh>
                 <circleGeometry args={[0.42, 6]} />
-                <meshBasicMaterial color="#04140d" transparent opacity={0.85} />
+                <meshBasicMaterial color="#080c1c" transparent opacity={0.85} />
               </mesh>
               <mesh>
                 <ringGeometry args={[0.42, 0.45, 6]} />
-                <meshBasicMaterial color={neon('#c6ff3d', 2)} toneMapped={false} />
+                <meshBasicMaterial color={neon('#ffb86b', 2)} toneMapped={false} />
               </mesh>
-              <Text font={FONT_DISPLAY} fontSize={0.2} color={neon('#c6ff3d', 1.5)}>
+              <Text font={FONT_DISPLAY} fontSize={0.2} color={neon('#ffb86b', 1.5)}>
                 {c.badge}
               </Text>
-              <Text font={FONT_MONO} fontSize={0.09} position={[0, -0.6, 0]} color="#bfe9d4" maxWidth={1.6} textAlign="center">
+              <Text font={FONT_MONO} fontSize={0.09} position={[0, -0.6, 0]} color="#c3cdee" maxWidth={1.6} textAlign="center">
                 {`${c.issuer}\n${c.name}`}
               </Text>
             </Billboard>

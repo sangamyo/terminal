@@ -216,7 +216,7 @@ export function NeofetchBlock() {
           </Row>
         ))}
         <Row className="t-swatches">
-          {['#0b0f0e', '#39ff88', '#22e5ff', '#c6ff3d', '#7aa2ff', '#e8fff4'].map((c) => (
+          {['#0b0d18', '#5cf2c8', '#6cb8ff', '#ffb86b', '#9d8cff', '#eceffe'].map((c) => (
             <span key={c} style={{ background: c }} />
           ))}
         </Row>

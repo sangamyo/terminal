@@ -78,12 +78,12 @@ export default function SkillUniverse() {
       {Object.values(BAND_LAT).map((lat) => (
         <mesh key={lat} position={[0, Math.sin(lat) * RADIUS, 0]} rotation={[Math.PI / 2, 0, 0]}>
           <torusGeometry args={[RADIUS * Math.cos(lat), 0.005, 4, 160]} />
-          <meshBasicMaterial color={neon('#1fbf77', 1)} transparent opacity={0.25} toneMapped={false} />
+          <meshBasicMaterial color={neon('#2fb39a', 1)} transparent opacity={0.25} toneMapped={false} />
         </mesh>
       ))}
       <mesh>
         <icosahedronGeometry args={[0.7, 2]} />
-        <meshBasicMaterial color={neon('#39ff88', 1.5)} wireframe toneMapped={false} />
+        <meshBasicMaterial color={neon('#5cf2c8', 1.5)} wireframe toneMapped={false} />
       </mesh>
 
       <group ref={group}>
@@ -120,7 +120,7 @@ const SkillCard = memo(function SkillCard({ skill, color, position }) {
         <planeGeometry args={[0.035, CARD_H - 0.16]} />
         <meshBasicMaterial color={neon(color, 2.4)} toneMapped={false} />
       </mesh>
-      <Text font={FONT_MONO} fontSize={0.17} position={[-CARD_W / 2 + 0.18, 0.04, 0.002]} anchorX="left" anchorY="middle" color={dimmed ? '#5c7469' : '#eafff4'} whiteSpace="nowrap">
+      <Text font={FONT_MONO} fontSize={0.17} position={[-CARD_W / 2 + 0.18, 0.04, 0.002]} anchorX="left" anchorY="middle" color={dimmed ? '#677092' : '#eef1ff'} whiteSpace="nowrap">
         {skill.name}
       </Text>
       <Text font={FONT_MONO} fontSize={0.09} position={[-CARD_W / 2 + 0.18, -0.15, 0.002]} anchorX="left" anchorY="middle" color={neon(color, dimmed ? 0.5 : 1.2)}>
@@ -149,7 +149,7 @@ const SkillCard = memo(function SkillCard({ skill, color, position }) {
         }}
       >
         <RoundedBox args={[CARD_W, CARD_H, 0.06]} radius={0.05} smoothness={3}>
-          <meshStandardMaterial color={dimmed ? '#050a08' : '#08120f'} metalness={0.5} roughness={0.35} />
+          <meshStandardMaterial color={dimmed ? '#06070f' : '#0a0d1a'} metalness={0.5} roughness={0.35} />
         </RoundedBox>
         <Line ref={glow} points={frame} color={neon(color, 2)} lineWidth={1.2} transparent opacity={0.45} toneMapped={false} />
         {face(false)}

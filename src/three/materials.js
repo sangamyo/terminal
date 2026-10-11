@@ -31,7 +31,7 @@ export const NOISE_GLSL = /* glsl */ `
 
 /** Holographic panel: glowing edges, moving scanlines, soft interior. */
 export const HoloMaterial = shaderMaterial(
-  { uTime: 0, uColor: new Color('#22e5ff'), uIntensity: 1, uOpacity: 1 },
+  { uTime: 0, uColor: new Color('#6cb8ff'), uIntensity: 1, uOpacity: 1 },
   /* glsl */ `
     varying vec2 vUv;
     void main() {

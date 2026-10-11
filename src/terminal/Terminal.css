@@ -58,15 +58,15 @@
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: #263330;
+  background: #262c42;
 }
 
 .dots span:nth-child(1) {
-  background: #ff5f6d;
+  background: #ff6b8a;
   opacity: 0.8;
 }
 .dots span:nth-child(2) {
-  background: #ffcc4d;
+  background: #ffd36b;
   opacity: 0.8;
 }
 .dots span:nth-child(3) {
@@ -102,8 +102,8 @@
   overflow-x: hidden;
   padding: 16px 18px 20px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(57, 255, 136, 0.3) transparent;
-  text-shadow: 0 0 6px rgba(57, 255, 136, 0.18);
+  scrollbar-color: rgba(92, 242, 200, 0.3) transparent;
+  text-shadow: 0 0 6px rgba(92, 242, 200, 0.18);
   cursor: text;
 }
 
@@ -192,7 +192,7 @@
 .t-link {
   color: var(--text);
   text-decoration: underline;
-  text-decoration-color: rgba(34, 229, 255, 0.4);
+  text-decoration-color: rgba(108, 184, 255, 0.4);
   text-underline-offset: 3px;
 }
 .t-link:hover {
@@ -206,7 +206,7 @@
   color: var(--green);
   cursor: pointer;
   text-align: left;
-  text-decoration: underline dotted rgba(57, 255, 136, 0.45);
+  text-decoration: underline dotted rgba(92, 242, 200, 0.45);
   text-underline-offset: 3px;
 }
 
@@ -267,7 +267,7 @@
   padding: 16px 18px;
   border: 1px dashed var(--line-strong);
   border-radius: 10px;
-  background: rgba(57, 255, 136, 0.03);
+  background: rgba(92, 242, 200, 0.03);
 }
 
 .t-welcome-title {
@@ -278,8 +278,8 @@
   letter-spacing: -0.01em;
   color: #fff;
   text-shadow:
-    0 0 18px rgba(57, 255, 136, 0.35),
-    0 0 2px rgba(34, 229, 255, 0.6);
+    0 0 18px rgba(92, 242, 200, 0.35),
+    0 0 2px rgba(108, 184, 255, 0.6);
 }
 
 .t-welcome-sub {
@@ -303,7 +303,7 @@
 
 .t-quick .t-cmd:hover {
   border-color: var(--green);
-  background: rgba(57, 255, 136, 0.1);
+  background: rgba(92, 242, 200, 0.1);
 }
 
 /* blocks */
@@ -333,7 +333,7 @@
 .t-bar {
   height: 6px;
   border-radius: 3px;
-  background: rgba(57, 255, 136, 0.1);
+  background: rgba(92, 242, 200, 0.1);
   overflow: hidden;
 }
 
@@ -460,7 +460,7 @@
 /* On narrow screens the docked terminal overlays a panel, so it needs an opaque surface. */
 @media (max-width: 1023px) {
   .terminal.is-docked {
-    background: rgba(5, 10, 9, 0.97);
+    background: rgba(5, 7, 15, 0.97);
     box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.7);
   }
 }

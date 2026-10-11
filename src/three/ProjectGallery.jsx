@@ -63,17 +63,17 @@ const HoloCard = memo(function HoloCard({ project, index }) {
             onClick={select}
           >
             <planeGeometry args={[W, H]} />
-            <meshBasicMaterial color="#03100b" transparent opacity={0.72} depthWrite={false} />
+            <meshBasicMaterial color="#070a17" transparent opacity={0.72} depthWrite={false} />
           </mesh>
           <mesh position={[0, 0, 0.005]}>
             <planeGeometry args={[W, H]} />
-            <holoMaterial ref={frame} {...holoProps} uColor={neon(index % 2 ? '#22e5ff' : '#39ff88', 1)} uTime={index * 2.3} />
+            <holoMaterial ref={frame} {...holoProps} uColor={neon(index % 2 ? '#6cb8ff' : '#5cf2c8', 1)} uTime={index * 2.3} />
           </mesh>
 
-          <Text font={FONT_MONO} fontSize={0.1} position={[-W / 2 + 0.18, H / 2 - 0.18, 0.02]} anchorX="left" anchorY="top" color={neon('#39ff88', 1.4)} letterSpacing={0.1}>
+          <Text font={FONT_MONO} fontSize={0.1} position={[-W / 2 + 0.18, H / 2 - 0.18, 0.02]} anchorX="left" anchorY="top" color={neon('#5cf2c8', 1.4)} letterSpacing={0.1}>
             {`PRJ_${String(index + 1).padStart(2, '0')}`}
           </Text>
-          <Text font={FONT_MONO} fontSize={0.1} position={[W / 2 - 0.18, H / 2 - 0.18, 0.02]} anchorX="right" anchorY="top" color="#5f7d70">
+          <Text font={FONT_MONO} fontSize={0.1} position={[W / 2 - 0.18, H / 2 - 0.18, 0.02]} anchorX="right" anchorY="top" color="#6c7598">
             {project.live ? '● LIVE' : '○ REPO'}
           </Text>
 
@@ -87,7 +87,7 @@ const HoloCard = memo(function HoloCard({ project, index }) {
             anchorY="top"
             maxWidth={W - 0.36}
             lineHeight={1.15}
-            color="#f0fff8"
+            color="#f4f6ff"
           >
             {project.title}
           </Text>
@@ -99,7 +99,7 @@ const HoloCard = memo(function HoloCard({ project, index }) {
             anchorY="top"
             maxWidth={W - 0.36}
             lineHeight={1.45}
-            color="#8fb3a3"
+            color="#9aa4c8"
           >
             {project.short}
           </Text>
@@ -110,7 +110,7 @@ const HoloCard = memo(function HoloCard({ project, index }) {
             anchorX="left"
             anchorY="bottom"
             maxWidth={W - 0.36}
-            color={neon('#22e5ff', 1.3)}
+            color={neon('#6cb8ff', 1.3)}
           >
             {project.tech.join('  ·  ')}
           </Text>

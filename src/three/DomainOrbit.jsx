@@ -41,7 +41,7 @@ export default function DomainOrbit() {
       <group ref={group}>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
           <torusGeometry args={[RADIUS, 0.006, 4, 220]} />
-          <meshBasicMaterial color={neon('#22e5ff', 1.2)} transparent opacity={0.35} toneMapped={false} />
+          <meshBasicMaterial color={neon('#6cb8ff', 1.2)} transparent opacity={0.35} toneMapped={false} />
         </mesh>
         {nodes.map((n, i) => (
           <DomainNode key={n.label} node={n} active={active === i} onHover={(on) => setActive(on ? i : null)} />
@@ -64,7 +64,7 @@ function DomainNode({ node, active, onHover }) {
 
   return (
     <group position={node.position}>
-      <Line points={[[0, 0, 0], node.position.map((v) => -v)]} color="#1fbf77" lineWidth={0.6} transparent opacity={active ? 0.6 : 0.14} />
+      <Line points={[[0, 0, 0], node.position.map((v) => -v)]} color="#2fb39a" lineWidth={0.6} transparent opacity={active ? 0.6 : 0.14} />
       <Billboard>
         <mesh
           onPointerOver={(e) => {
@@ -86,18 +86,18 @@ function DomainNode({ node, active, onHover }) {
         </mesh>
         <mesh ref={gem}>
           <octahedronGeometry args={[0.18, 0]} />
-          <meshBasicMaterial color={neon(active ? '#ffffff' : '#39ff88', 2.4)} wireframe={!active} toneMapped={false} />
+          <meshBasicMaterial color={neon(active ? '#ffffff' : '#5cf2c8', 2.4)} wireframe={!active} toneMapped={false} />
         </mesh>
         <Text
           font={FONT_MONO}
           position={[0, -0.38, 0]}
           fontSize={0.2}
           letterSpacing={0.08}
-          color={active ? neon('#ffffff', 1.6) : neon('#9dffd0', 1.1)}
+          color={active ? neon('#ffffff', 1.6) : neon('#a9c4ff', 1.1)}
           anchorX="center"
           anchorY="top"
           outlineWidth={active ? 0.004 : 0}
-          outlineColor="#22e5ff"
+          outlineColor="#6cb8ff"
         >
           {node.label}
         </Text>

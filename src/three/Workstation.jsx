@@ -8,7 +8,7 @@ import { holoProps, neon } from './materials'
 const SCREENS = [
   {
     title: 'policy.py',
-    color: '#39ff88',
+    color: '#5cf2c8',
     code: [
       'class VLAPolicy(nn.Module):',
       '  def forward(self, img, text):',
@@ -19,7 +19,7 @@ const SCREENS = [
   },
   {
     title: 'detect.py',
-    color: '#22e5ff',
+    color: '#6cb8ff',
     code: [
       'cap = cv2.VideoCapture(0)',
       'while cap.isOpened():',
@@ -30,7 +30,7 @@ const SCREENS = [
   },
   {
     title: 'api.py',
-    color: '#c6ff3d',
+    color: '#ffb86b',
     code: [
       '@app.post("/analyze")',
       'async def analyze(cv: Resume):',
@@ -48,25 +48,25 @@ export default function Workstation() {
       {/* floor halo */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.25, 0]}>
         <ringGeometry args={[2.6, 2.66, 96]} />
-        <meshBasicMaterial color={neon('#39ff88', 1.6)} toneMapped={false} transparent opacity={0.6} />
+        <meshBasicMaterial color={neon('#5cf2c8', 1.6)} toneMapped={false} transparent opacity={0.6} />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.26, 0]}>
         <circleGeometry args={[2.6, 64]} />
-        <meshBasicMaterial color="#06140e" transparent opacity={0.65} />
+        <meshBasicMaterial color="#090d1e" transparent opacity={0.65} />
       </mesh>
 
       {/* desk */}
       <RoundedBox args={[4.2, 0.1, 1.5]} radius={0.04} position={[0, -0.35, 0.4]}>
-        <meshStandardMaterial color="#0c1714" metalness={0.7} roughness={0.35} />
+        <meshStandardMaterial color="#0e1222" metalness={0.7} roughness={0.35} />
       </RoundedBox>
       <mesh position={[0, -0.29, 1.15]}>
         <boxGeometry args={[4.2, 0.012, 0.012]} />
-        <meshBasicMaterial color={neon('#22e5ff', 2.5)} toneMapped={false} />
+        <meshBasicMaterial color={neon('#6cb8ff', 2.5)} toneMapped={false} />
       </mesh>
       {/* holographic keyboard */}
       <mesh position={[0, -0.28, 0.75]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[1.6, 0.5, 16, 4]} />
-        <meshBasicMaterial color={neon('#39ff88', 1.4)} wireframe transparent opacity={0.4} toneMapped={false} />
+        <meshBasicMaterial color={neon('#5cf2c8', 1.4)} wireframe transparent opacity={0.4} toneMapped={false} />
       </mesh>
 
       {/* monitors */}
@@ -97,7 +97,7 @@ function Monitor({ screen, index }) {
       </mesh>
       <mesh position={[0, 0, -0.01]}>
         <planeGeometry args={[1.7, 1.08]} />
-        <meshBasicMaterial color="#020806" transparent opacity={0.75} />
+        <meshBasicMaterial color="#03040a" transparent opacity={0.75} />
       </mesh>
       <Text font={FONT_MONO} fontSize={0.065} color={neon(screen.color, 1.3)} position={[-0.76, 0.44, 0.01]} anchorX="left" anchorY="top">
         {`● ${screen.title}`}
@@ -106,7 +106,7 @@ function Monitor({ screen, index }) {
         font={FONT_MONO}
         fontSize={0.07}
         lineHeight={1.5}
-        color="#cfeee0"
+        color="#d4dcf8"
         position={[-0.76, 0.3, 0.01]}
         anchorX="left"
         anchorY="top"
@@ -135,22 +135,22 @@ function Avatar(props) {
       <group ref={head}>
         <mesh>
           <icosahedronGeometry args={[0.62, 1]} />
-          <meshBasicMaterial color={neon('#22e5ff', 1.8)} wireframe toneMapped={false} />
+          <meshBasicMaterial color={neon('#6cb8ff', 1.8)} wireframe toneMapped={false} />
         </mesh>
         <mesh scale={0.4}>
           <icosahedronGeometry args={[1, 3]} />
-          <meshStandardMaterial color="#0a2a1d" emissive="#39ff88" emissiveIntensity={1.4} roughness={0.3} toneMapped={false} />
+          <meshStandardMaterial color="#121a3a" emissive="#5cf2c8" emissiveIntensity={1.4} roughness={0.3} toneMapped={false} />
         </mesh>
       </group>
       <mesh ref={scan} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[0.82, 0.008, 4, 96]} />
-        <meshBasicMaterial color={neon('#39ff88', 3)} toneMapped={false} />
+        <meshBasicMaterial color={neon('#5cf2c8', 3)} toneMapped={false} />
       </mesh>
       <mesh position={[0, -0.95, 0]}>
         <cylinderGeometry args={[0.02, 0.35, 0.6, 24, 1, true]} />
-        <meshBasicMaterial color={neon('#22e5ff', 1.2)} transparent opacity={0.25} toneMapped={false} depthWrite={false} />
+        <meshBasicMaterial color={neon('#6cb8ff', 1.2)} transparent opacity={0.25} toneMapped={false} depthWrite={false} />
       </mesh>
-      <Text font={FONT_DISPLAY} fontSize={0.32} position={[0, 0.98, 0]} color={neon('#e8fff4', 1.4)} letterSpacing={0.2}>
+      <Text font={FONT_DISPLAY} fontSize={0.32} position={[0, 0.98, 0]} color={neon('#eceffe', 1.4)} letterSpacing={0.2}>
         HK
       </Text>
     </Float>

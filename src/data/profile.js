@@ -37,11 +37,11 @@ export const profile = {
 /* ------------------------------------------------------------------ */
 
 export const skillCategories = [
-  { id: 'ai', label: 'AI / ML', color: '#39ff88' },
-  { id: 'cv', label: 'Computer Vision', color: '#22e5ff' },
-  { id: 'robotics', label: 'Robotics', color: '#c6ff3d' },
-  { id: 'software', label: 'Software', color: '#7aa2ff' },
-  { id: 'web', label: 'Backend & Web', color: '#b18cff' },
+  { id: 'ai', label: 'AI / ML', color: '#5cf2c8' },
+  { id: 'cv', label: 'Computer Vision', color: '#6cb8ff' },
+  { id: 'robotics', label: 'Robotics', color: '#ffb86b' },
+  { id: 'software', label: 'Software', color: '#9d8cff' },
+  { id: 'web', label: 'Backend & Web', color: '#e58cff' },
 ]
 
 // level: 0–100 (self-assessed). context: one line shown in the hover panel.

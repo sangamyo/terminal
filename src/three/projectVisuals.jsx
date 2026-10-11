@@ -37,14 +37,14 @@ function FaceVisual() {
       <group ref={head}>
         <mesh scale={[0.32, 0.4, 0.32]}>
           <icosahedronGeometry args={[1, 2]} />
-          <meshBasicMaterial color={neon('#22e5ff', 1.4)} wireframe toneMapped={false} />
+          <meshBasicMaterial color={neon('#6cb8ff', 1.4)} wireframe toneMapped={false} />
         </mesh>
       </group>
       <group ref={box}>
         {corners.map((pts, i) => (
-          <Line key={i} points={pts} color={neon('#39ff88', 2.5)} lineWidth={2} toneMapped={false} />
+          <Line key={i} points={pts} color={neon('#5cf2c8', 2.5)} lineWidth={2} toneMapped={false} />
         ))}
-        <Text font={FONT_MONO} fontSize={0.08} position={[-s, s + 0.08, 0]} anchorX="left" color={neon('#39ff88', 1.6)}>
+        <Text font={FONT_MONO} fontSize={0.08} position={[-s, s + 0.08, 0]} anchorX="left" color={neon('#5cf2c8', 1.6)}>
           face 0.98
         </Text>
       </group>
@@ -61,8 +61,8 @@ function TrafficVisual() {
     lights.current.forEach((l, i) => {
       if (!l) return
       const green = (i % 2) === phase
-      l.children[0].material.color.set(green ? '#1a1a1a' : '#ff3b4f').multiplyScalar(green ? 1 : 2.5)
-      l.children[1].material.color.set(green ? '#39ff88' : '#1a1a1a').multiplyScalar(green ? 2.5 : 1)
+      l.children[0].material.color.set(green ? '#1a1a1a' : '#ff5c7a').multiplyScalar(green ? 1 : 2.5)
+      l.children[1].material.color.set(green ? '#5cf2c8' : '#1a1a1a').multiplyScalar(green ? 2.5 : 1)
     })
     cars.current.forEach((c, i) => {
       if (!c) return
@@ -75,15 +75,15 @@ function TrafficVisual() {
     <group rotation={[0.75, 0.6, 0]} scale={1.1}>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.1, 0]}>
         <planeGeometry args={[1.6, 0.42]} />
-        <meshStandardMaterial color="#14201c" />
+        <meshStandardMaterial color="#161b2e" />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, Math.PI / 2]} position={[0, -0.099, 0]}>
         <planeGeometry args={[1.6, 0.42]} />
-        <meshStandardMaterial color="#14201c" />
+        <meshStandardMaterial color="#161b2e" />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.098, 0]}>
         <planeGeometry args={[1.6, 1.6, 16, 16]} />
-        <meshBasicMaterial color={neon('#22e5ff', 0.8)} wireframe transparent opacity={0.18} toneMapped={false} />
+        <meshBasicMaterial color={neon('#6cb8ff', 0.8)} wireframe transparent opacity={0.18} toneMapped={false} />
       </mesh>
       {[[-0.32, 0.32], [0.32, -0.32], [0.32, 0.32], [-0.32, -0.32]].map(([x, z], i) => (
         <group key={i} position={[x, 0.05, z]} ref={(el) => (lights.current[i] = el)}>
@@ -97,14 +97,14 @@ function TrafficVisual() {
           </mesh>
           <mesh position={[0, -0.06, 0]}>
             <boxGeometry args={[0.02, 0.1, 0.02]} />
-            <meshStandardMaterial color="#2b3a35" />
+            <meshStandardMaterial color="#2b3248" />
           </mesh>
         </group>
       ))}
       {[0, 1, 2, 3].map((i) => (
         <mesh key={i} ref={(el) => (cars.current[i] = el)}>
           <boxGeometry args={i % 2 ? [0.1, 0.06, 0.18] : [0.18, 0.06, 0.1]} />
-          <meshBasicMaterial color={neon(i % 2 ? '#22e5ff' : '#c6ff3d', 1.6)} toneMapped={false} />
+          <meshBasicMaterial color={neon(i % 2 ? '#6cb8ff' : '#ffb86b', 1.6)} toneMapped={false} />
         </mesh>
       ))}
     </group>
@@ -123,20 +123,20 @@ function ResumeVisual() {
         <group key={i} position={[i * 0.12 - 0.12, i * -0.05, -i * 0.12]}>
           <mesh>
             <planeGeometry args={[0.85, 1.1]} />
-            <meshBasicMaterial color={i === 0 ? '#0b1f18' : '#081511'} transparent opacity={0.92} />
+            <meshBasicMaterial color={i === 0 ? '#0e142b' : '#0a0e1d'} transparent opacity={0.92} />
           </mesh>
           {i === 0 &&
             [0.38, 0.26, 0.14, 0.02, -0.1, -0.22, -0.34].map((y, j) => (
               <mesh key={y} position={[-0.32 + (j === 0 ? 0.18 : (j % 3) * 0.04) / 2, y, 0.001]}>
                 <planeGeometry args={[j === 0 ? 0.42 : 0.6 - (j % 3) * 0.1, 0.035]} />
-                <meshBasicMaterial color={neon(j === 0 ? '#39ff88' : '#7d9a8c', j === 0 ? 2 : 1)} toneMapped={false} />
+                <meshBasicMaterial color={neon(j === 0 ? '#5cf2c8' : '#8a93b8', j === 0 ? 2 : 1)} toneMapped={false} />
               </mesh>
             ))}
         </group>
       ))}
       <mesh ref={scan} position={[0, 0, 0.02]}>
         <planeGeometry args={[1.05, 0.025]} />
-        <meshBasicMaterial color={neon('#22e5ff', 3)} toneMapped={false} />
+        <meshBasicMaterial color={neon('#6cb8ff', 3)} toneMapped={false} />
       </mesh>
     </group>
   )
@@ -160,13 +160,13 @@ function VoiceVisual() {
         return (
           <mesh key={i} position={[Math.cos(a) * 0.55, Math.sin(a) * 0.55, 0]} rotation={[0, 0, a - Math.PI / 2]} ref={(el) => (bars.current[i] = el)}>
             <boxGeometry args={[0.05, 0.4, 0.05]} />
-            <meshBasicMaterial color={neon(i % 2 ? '#39ff88' : '#22e5ff', 2)} toneMapped={false} />
+            <meshBasicMaterial color={neon(i % 2 ? '#5cf2c8' : '#6cb8ff', 2)} toneMapped={false} />
           </mesh>
         )
       })}
       <mesh>
         <capsuleGeometry args={[0.12, 0.22, 6, 16]} />
-        <meshStandardMaterial color="#0c1a15" emissive="#39ff88" emissiveIntensity={0.6} metalness={0.6} roughness={0.3} />
+        <meshStandardMaterial color="#0f1426" emissive="#5cf2c8" emissiveIntensity={0.6} metalness={0.6} roughness={0.3} />
       </mesh>
     </group>
   )
@@ -180,17 +180,17 @@ function StyleVisual() {
     a.current.rotation.set(t.current * 0.4, t.current * 0.6, 0)
     b.current.rotation.copy(a.current.rotation)
     const hue = (t.current * 0.05) % 1
-    b.current.material.color.setHSL(0.35 + Math.sin(hue * Math.PI * 2) * 0.15, 0.7, 0.55)
+    b.current.material.color.setHSL(0.6 + Math.sin(hue * Math.PI * 2) * 0.12, 0.75, 0.62)
   })
   return (
     <group scale={0.62}>
       <mesh ref={a} position={[-0.25, 0, 0]}>
         <torusKnotGeometry args={[0.55, 0.18, 120, 16]} />
-        <meshBasicMaterial color={neon('#22e5ff', 1.3)} wireframe toneMapped={false} />
+        <meshBasicMaterial color={neon('#6cb8ff', 1.3)} wireframe toneMapped={false} />
       </mesh>
       <mesh ref={b} position={[0.25, 0, 0]}>
         <torusKnotGeometry args={[0.55, 0.18, 120, 16]} />
-        <meshToonMaterial color="#7dffb0" />
+        <meshToonMaterial color="#8fe9d0" />
       </mesh>
     </group>
   )
@@ -211,8 +211,8 @@ function RobotVisual() {
     if (fingers.current[0]) fingers.current[0].position.x = -g
     if (fingers.current[1]) fingers.current[1].position.x = g
   })
-  const metal = <meshStandardMaterial color="#1a2b25" metalness={0.8} roughness={0.25} emissive="#0a3322" />
-  const joint = <meshBasicMaterial color={neon('#39ff88', 2.4)} toneMapped={false} />
+  const metal = <meshStandardMaterial color="#1b2238" metalness={0.8} roughness={0.25} emissive="#141d44" />
+  const joint = <meshBasicMaterial color={neon('#5cf2c8', 2.4)} toneMapped={false} />
   return (
     <group position={[0, -0.55, 0]} scale={0.95}>
       <mesh>
@@ -246,7 +246,7 @@ function RobotVisual() {
               {[0, 1].map((i) => (
                 <mesh key={i} ref={(el) => (fingers.current[i] = el)} position={[0, 0.06, 0]}>
                   <boxGeometry args={[0.02, 0.12, 0.05]} />
-                  <meshBasicMaterial color={neon('#22e5ff', 2)} toneMapped={false} />
+                  <meshBasicMaterial color={neon('#6cb8ff', 2)} toneMapped={false} />
                 </mesh>
               ))}
             </group>
@@ -255,7 +255,7 @@ function RobotVisual() {
       </group>
       <mesh position={[0.5, 0.08, 0.1]}>
         <boxGeometry args={[0.12, 0.12, 0.12]} />
-        <meshBasicMaterial color={neon('#c6ff3d', 1.8)} wireframe toneMapped={false} />
+        <meshBasicMaterial color={neon('#ffb86b', 1.8)} wireframe toneMapped={false} />
       </mesh>
     </group>
   )
@@ -278,13 +278,13 @@ function AlgoVisual() {
       {Array.from({ length: N }, (_, i) => (
         <mesh key={i} position={[(i - (N - 1) / 2) * 0.17, 0, 0]} ref={(el) => (bars.current[i] = el)}>
           <boxGeometry args={[0.11, 1, 0.11]} />
-          <meshBasicMaterial color={neon(i > 5 ? '#39ff88' : '#22e5ff', 1.8)} toneMapped={false} />
+          <meshBasicMaterial color={neon(i > 5 ? '#5cf2c8' : '#6cb8ff', 1.8)} toneMapped={false} />
         </mesh>
       ))}
-      <Line points={Array.from({ length: N }, (_, i) => [(i - (N - 1) / 2) * 0.17, -0.2 + i * 0.09, 0.1])} color={neon('#c6ff3d', 2.4)} lineWidth={2} toneMapped={false} />
+      <Line points={Array.from({ length: N }, (_, i) => [(i - (N - 1) / 2) * 0.17, -0.2 + i * 0.09, 0.1])} color={neon('#ffb86b', 2.4)} lineWidth={2} toneMapped={false} />
       <mesh position={[0, -0.56, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[1.7, 0.6, 10, 4]} />
-        <meshBasicMaterial color={neon('#22e5ff', 0.8)} wireframe transparent opacity={0.25} toneMapped={false} />
+        <meshBasicMaterial color={neon('#6cb8ff', 0.8)} wireframe transparent opacity={0.25} toneMapped={false} />
       </mesh>
     </group>
   )
@@ -301,7 +301,7 @@ function HandVisual() {
       if (f) f.rotation.x = (Math.sin(t.current * 2 + i * 0.5) * 0.5 + 0.5) * 1.2
     })
   })
-  const mat = <meshBasicMaterial color={neon('#22e5ff', 1.6)} wireframe toneMapped={false} />
+  const mat = <meshBasicMaterial color={neon('#6cb8ff', 1.6)} wireframe toneMapped={false} />
   return (
     <group ref={hand} position={[0, -0.25, 0]}>
       <mesh>
@@ -312,20 +312,20 @@ function HandVisual() {
         <group key={i} position={[x, 0.28, 0]} ref={(el) => (fingers.current[i] = el)}>
           <mesh position={[0, 0.2, 0]}>
             <capsuleGeometry args={[0.05, 0.3, 4, 8]} />
-            <meshBasicMaterial color={neon('#39ff88', 2)} toneMapped={false} />
+            <meshBasicMaterial color={neon('#5cf2c8', 2)} toneMapped={false} />
           </mesh>
         </group>
       ))}
       <group position={[-0.36, 0.05, 0]} rotation={[0, 0, 0.8]}>
         <mesh position={[0, 0.16, 0]}>
           <capsuleGeometry args={[0.055, 0.22, 4, 8]} />
-          <meshBasicMaterial color={neon('#39ff88', 2)} toneMapped={false} />
+          <meshBasicMaterial color={neon('#5cf2c8', 2)} toneMapped={false} />
         </mesh>
       </group>
       {[[-0.24, 0.62], [0.08, 0.7], [0.24, 0.64], [-0.36, 0.3]].map(([x, y], i) => (
         <mesh key={i} position={[x, y, 0.08]}>
           <sphereGeometry args={[0.03, 8, 8]} />
-          <meshBasicMaterial color={neon('#c6ff3d', 3)} toneMapped={false} />
+          <meshBasicMaterial color={neon('#ffb86b', 3)} toneMapped={false} />
         </mesh>
       ))}
     </group>
@@ -355,19 +355,19 @@ function DataVisual() {
         {[0.32, 0, -0.32].map((y) => (
           <mesh key={y} position={[0, y, 0]}>
             <cylinderGeometry args={[0.32, 0.32, 0.22, 24, 1]} />
-            <meshBasicMaterial color={neon('#22e5ff', 1.4)} wireframe toneMapped={false} />
+            <meshBasicMaterial color={neon('#6cb8ff', 1.4)} wireframe toneMapped={false} />
           </mesh>
         ))}
         {rows.map((r, i) => (
           <mesh key={i} position={[Math.cos(r.a) * 0.62, r.y, Math.sin(r.a) * 0.62]} ref={(el) => (flags.current[i] = el)}>
             <boxGeometry args={[0.07, 0.07, 0.07]} />
-            <meshBasicMaterial color={neon(r.bad ? '#c6ff3d' : '#39ff88', r.bad ? 2.6 : 1.6)} toneMapped={false} />
+            <meshBasicMaterial color={neon(r.bad ? '#ffb86b' : '#5cf2c8', r.bad ? 2.6 : 1.6)} toneMapped={false} />
           </mesh>
         ))}
       </group>
       <mesh ref={scan} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.68, 0.72, 48]} />
-        <meshBasicMaterial color={neon('#22e5ff', 3)} toneMapped={false} />
+        <meshBasicMaterial color={neon('#6cb8ff', 3)} toneMapped={false} />
       </mesh>
     </group>
   )

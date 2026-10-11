@@ -42,14 +42,14 @@ export default function MatrixRain({ ambient = false }) {
         ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
         ctx.globalCompositeOperation = 'source-over'
       } else {
-        ctx.fillStyle = 'rgba(5,8,7,0.1)'
+        ctx.fillStyle = 'rgba(5,6,13,0.1)'
         ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
       }
       ctx.font = `${size - 2}px JetBrains Mono, monospace`
       for (let i = 0; i < drops.length; i++) {
         const ch = GLYPHS[(Math.random() * GLYPHS.length) | 0]
         const y = drops[i] * size
-        ctx.fillStyle = Math.random() > 0.975 ? '#e8fff4' : i % 7 === 0 ? '#22e5ff' : '#39ff88'
+        ctx.fillStyle = Math.random() > 0.975 ? '#eceffe' : i % 7 === 0 ? '#6cb8ff' : '#5cf2c8'
         ctx.fillText(ch, i * size, y)
         if (y > window.innerHeight && Math.random() > (ambient ? 0.985 : 0.97)) drops[i] = 0
         drops[i] += ambient ? 0.5 : 1
