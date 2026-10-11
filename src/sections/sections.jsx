@@ -240,7 +240,7 @@ function ProjectCard({ project, index }) {
       <div className="project-card-head">
         <span className="project-id">PRJ_{String(index + 1).padStart(2, '0')}</span>
         <span className="project-glyph" aria-hidden="true">
-          {{ data: '⛁', face: '◉', traffic: '⊕', resume: '▤', voice: '◍', style: '✦', robot: '⌬', algo: '▥', hand: '✋' }[project.visual]}
+          {{ data: '⛁', rag: '❏', chat: '◫', face: '◉', traffic: '⊕', resume: '▤', voice: '◍', style: '✦', robot: '⌬', algo: '▥', hand: '✋' }[project.visual]}
         </span>
       </div>
       <h3>{project.title}</h3>

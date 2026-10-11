@@ -52,10 +52,11 @@ export const skills = [
   { id: 'pytorch', name: 'PyTorch', category: 'ai', level: 72, context: 'PyTorch-based VLA training and evaluation pipelines at Addverb.', projects: ['vla'] },
   { id: 'ml', name: 'Machine Learning', category: 'ai', level: 76, context: 'Dataset quality, evaluation and the workflow around models.', projects: ['datalens', 'ats'] },
   { id: 'dl', name: 'Deep Learning', category: 'ai', level: 72, context: 'Neural networks, transformers and embedding models.', projects: ['vla', 'ghibli'] },
-  { id: 'genai', name: 'Generative AI', category: 'ai', level: 80, context: 'LLM-powered products: dataset QC, natural-language search, resume analysis.', projects: ['datalens', 'ats', 'pdfrag'] },
-  { id: 'llms', name: 'LLMs', category: 'ai', level: 80, context: 'Gemini / Claude APIs, prompt templates and validated structured output.', projects: ['datalens', 'ats', 'pdfrag'] },
-  { id: 'embeddings', name: 'Embeddings / Semantic Search', category: 'ai', level: 74, context: 'bge-small embeddings in pgvector with an HNSW index (~6 ms top-25 queries).', projects: ['datalens', 'pdfrag'] },
-  { id: 'hf', name: 'Hugging Face', category: 'ai', level: 74, context: 'Importing instruction / chat datasets and running embedding models.', projects: ['datalens'] },
+  { id: 'genai', name: 'Generative AI', category: 'ai', level: 80, context: 'LLM-powered products: dataset QC, natural-language search, resume analysis.', projects: ['datalens', 'ats', 'pdfrag', 'ragchat'] },
+  { id: 'llms', name: 'LLMs', category: 'ai', level: 80, context: 'Gemini / Claude APIs, prompt templates, validated structured output and in-browser models.', projects: ['datalens', 'ats', 'pdfrag', 'ragchat'] },
+  { id: 'rag', name: 'RAG', category: 'ai', level: 74, context: 'Hybrid BM25 + vector retrieval, grounded prompts with citations, and answer checks.', projects: ['pdfrag', 'ragchat'] },
+  { id: 'embeddings', name: 'Embeddings / Semantic Search', category: 'ai', level: 74, context: 'bge-small embeddings in pgvector with an HNSW index (~6 ms top-25 queries), and in the browser.', projects: ['datalens', 'pdfrag', 'ragchat'] },
+  { id: 'hf', name: 'Hugging Face', category: 'ai', level: 74, context: 'Importing instruction / chat datasets and running embedding models.', projects: ['datalens', 'ragchat'] },
 
   // Computer Vision
   { id: 'opencv', name: 'OpenCV', category: 'cv', level: 75, context: 'Real-time webcam pipelines for hand tracking and face detection.', projects: ['hand', 'face-detect'] },
@@ -89,7 +90,7 @@ export const skills = [
   { id: 'node', name: 'Node.js', category: 'web', level: 82, context: 'MERN backends serving 500+ users at PureWashr.', projects: [] },
   { id: 'express', name: 'Express', category: 'web', level: 82, context: 'REST APIs and 15+ vendor-workflow integrations.', projects: [] },
   { id: 'django', name: 'Django', category: 'web', level: 62, context: 'Batteries-included Python web backends.', projects: [] },
-  { id: 'js', name: 'JavaScript', category: 'web', level: 82, context: 'Interactive frontends — including this portfolio.', projects: ['algoflow', 'ghibli'] },
+  { id: 'js', name: 'JavaScript', category: 'web', level: 82, context: 'Interactive frontends — including this portfolio.', projects: ['algoflow', 'ghibli', 'ragchat'] },
   { id: 'react', name: 'React', category: 'web', level: 82, context: 'Component-driven UIs, dashboards and this 3D site.', projects: ['datalens', 'algoflow'] },
   { id: 'nextjs', name: 'Next.js', category: 'web', level: 76, context: 'Full-stack apps with API routes.', projects: ['algoflow'] },
 ]
@@ -129,6 +130,21 @@ export const projects = [
       'A vision LLM describes every chart and image at ingest, including a table of the data values it reads, so charts become searchable text.',
       'Hybrid retrieval: bge-small embeddings (fastembed / ONNX) plus BM25 keyword search, merged with reciprocal rank fusion.',
       'Streams answers with [p. N] page citations from Groq (Claude optional); ingest is cached by file hash and deployed on Streamlit Cloud.',
+    ],
+  },
+  {
+    id: 'ragchat',
+    title: 'RAG Chat (in-browser)',
+    short: 'Ask questions about your PDFs and notes with cited answers. Retrieval and the LLM both run in your browser.',
+    tech: ['JavaScript', 'transformers.js', 'WebLLM', 'WebGPU', 'BM25', 'pdf.js'],
+    visual: 'chat',
+    github: `${GITHUB}/rag-chat`,
+    live: 'https://sangamyo.github.io/rag-chat/',
+    details: [
+      'Ingests PDFs (pdf.js with page-aware line reconstruction), Markdown and text; overlapping chunks are embedded with bge-small in a Web Worker.',
+      'Hybrid retrieval: cosine similarity plus BM25, merged with reciprocal rank fusion, with a relevance cut-off so off-topic questions return "not found".',
+      'Answers stream from an in-browser LLM (Qwen2.5 / Llama 3.2 via WebLLM on WebGPU) with clickable [n] citations and a sources panel showing page and match type.',
+      'Guard rails: a grounding check withholds answers the sources do not support, plus citation repair and extractive quick answers without a GPU; 17 tests in CI.',
     ],
   },
   {

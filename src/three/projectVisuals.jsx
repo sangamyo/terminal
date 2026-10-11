@@ -470,7 +470,89 @@ function RagVisual() {
   )
 }
 
+/** In-browser RAG: a browser window where chat bubbles appear in turn with citation markers,
+ *  over a slow swirl of embedding points — the whole pipeline lives inside the page. */
+function ChatVisual() {
+  const bubbles = useRef([])
+  const cites = useRef([])
+  const swirl = useRef()
+  const t = useTime()
+  const rows = [
+    { x: 0.16, y: 0.22, w: 0.42, color: '#5cf2c8' }, // question
+    { x: -0.1, y: 0.02, w: 0.6, color: '#6cb8ff', cite: true }, // answer with citations
+    { x: 0.2, y: -0.18, w: 0.34, color: '#5cf2c8' },
+    { x: -0.12, y: -0.36, w: 0.56, color: '#6cb8ff', cite: true },
+  ]
+  const points = useRef(
+    Array.from({ length: 36 }, (_, i) => {
+      const a = (i / 36) * Math.PI * 2
+      const r = 0.55 + ((i * 37) % 11) / 40
+      return [Math.cos(a) * r, Math.sin(a) * r * 0.75, -0.12 - ((i * 13) % 7) / 60]
+    }),
+  ).current
+  useFrame(() => {
+    const cycle = (t.current * 0.35) % 1
+    bubbles.current.forEach((b, i) => {
+      if (!b) return
+      const show = Math.min(1, Math.max(0, (cycle - i * 0.18) / 0.08))
+      b.scale.set(show, show, 1)
+    })
+    cites.current.forEach((c, i) => {
+      if (c) c.scale.setScalar(0.85 + Math.abs(Math.sin(t.current * 3 + i)) * 0.35)
+    })
+    if (swirl.current) swirl.current.rotation.z = t.current * 0.15
+  })
+  return (
+    <group rotation={[0, -0.25, 0]}>
+      <group ref={swirl}>
+        {points.map((p, i) => (
+          <mesh key={i} position={p}>
+            <sphereGeometry args={[0.012, 6, 6]} />
+            <meshBasicMaterial color={neon(i % 3 ? '#9d8cff' : '#6cb8ff', 1.6)} toneMapped={false} />
+          </mesh>
+        ))}
+      </group>
+      {/* browser window */}
+      <mesh>
+        <planeGeometry args={[0.98, 0.98]} />
+        <meshBasicMaterial color="#0b1024" transparent opacity={0.9} />
+      </mesh>
+      <mesh position={[0, 0.44, 0.001]}>
+        <planeGeometry args={[0.98, 0.1]} />
+        <meshBasicMaterial color="#151d45" />
+      </mesh>
+      {['#ff6b8a', '#ffd36b', '#5cf2c8'].map((c, i) => (
+        <mesh key={c} position={[-0.42 + i * 0.05, 0.44, 0.002]}>
+          <circleGeometry args={[0.014, 12]} />
+          <meshBasicMaterial color={c} />
+        </mesh>
+      ))}
+      <Line points={[[-0.49, -0.49, 0.002], [0.49, -0.49, 0.002], [0.49, 0.49, 0.002], [-0.49, 0.49, 0.002], [-0.49, -0.49, 0.002]]} color={neon('#6cb8ff', 1.6)} lineWidth={1.4} toneMapped={false} />
+      {rows.map((r, i) => (
+        <group key={i} position={[r.x, r.y, 0.01]} ref={(el) => (bubbles.current[i] = el)}>
+          <mesh>
+            <planeGeometry args={[r.w, 0.12]} />
+            <meshBasicMaterial color={neon(r.color, 0.55)} transparent opacity={0.85} toneMapped={false} />
+          </mesh>
+          <mesh position={[-r.w / 2 + 0.03 + (r.w - 0.18) / 2, 0, 0.001]}>
+            <planeGeometry args={[r.w - 0.18, 0.022]} />
+            <meshBasicMaterial color={neon('#eef1ff', 1.2)} toneMapped={false} />
+          </mesh>
+          {r.cite &&
+            [0, 1].map((k) => (
+              <mesh key={k} position={[r.w / 2 - 0.1 + k * 0.05, 0, 0.002]} ref={(el) => (cites.current[i * 2 + k] = el)}>
+                <planeGeometry args={[0.032, 0.032]} />
+                <meshBasicMaterial color={neon('#ffb86b', 2.2)} toneMapped={false} />
+              </mesh>
+            ))}
+        </group>
+      ))}
+    </group>
+  )
+}
+
 export const projectVisuals = {
+  chat: ChatVisual,
   rag: RagVisual,
   data: DataVisual,
   algo: AlgoVisual,
