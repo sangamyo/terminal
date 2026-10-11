@@ -1,8 +1,8 @@
 # hari-om@portfolio:~$
 
-Interactive 3D developer portfolio for **Hari Om Kasaundhan**. A working terminal sits in front of a Three.js workspace.
+**Live:** https://sangamyo.github.io/terminal/
 
-> Don't just read my resume. Explore my system.
+Interactive 3D developer portfolio for **Hari Om Kasaundhan**, AI Engineer and Software Engineer. A working terminal sits in front of a Three.js workspace with holographic project cards, a skill universe and a career timeline, in a deep-indigo "Midnight Aurora" palette (mint, sky blue and warm amber).
 
 ## Run
 
@@ -13,15 +13,20 @@ npm run build     # production build → dist/
 npm run preview   # serve the build
 ```
 
-Deploy `dist/` to any static host (Vercel, Netlify, GitHub Pages, Cloudflare Pages).
+Every push to `main` deploys to GitHub Pages (`.github/workflows/deploy.yml`).
 
 ## Edit your content
 
 Everything you'd want to change lives in **`src/data/profile.js`**: links, skills, projects, timeline, education and the AI-core domains. The terminal, the HTML panels and the 3D scenes all read from it.
 
-- **Resume:** put your PDF at `public/resume.pdf`.
+- **Résumé:** `public/resume.pdf`.
 - **Contact form:** set `contactFormEndpoint` to a Formspree (or similar) URL that accepts JSON. Leave it empty to fall back to `mailto:`.
 - **Links:** set a project's `github` / `live` URL to show its *GitHub* / *Live Demo* button; leave it `null` to hide the button.
+- **Hologram:** a project's `visual` picks its 3D animation from `src/three/projectVisuals.jsx`.
+
+## Projects shown
+
+DataLens · PDF RAG Chat · RAG Chat (in-browser) · ATS Resume Checker · AI Desktop Assistant (Jarvis) · Ghibli Image Converter · SYNCRONET-AI · Hand Gesture Control · AlgoFlow Tracker · Robotics / VLA work at Addverb · Real-Time Face Detection. Each card links to its live demo and repository where one exists.
 
 ## Commands
 
@@ -49,7 +54,6 @@ src/
 ```
 
 - **The terminal drives everything.** Nav clicks and 3D clicks dispatch commands through `runCommand`, so the terminal log always reflects where you are.
-- **Fast first paint.** three.js and R3F (~330 KB gzip) load in a separate chunk after the terminal is interactive (~127 KB gzip).
+- **Fast first paint.** three.js and R3F (~330 KB gzip) load in a separate chunk after the terminal is interactive (~130 KB gzip).
 - **Adaptive quality.** `high` (bloom, depth of field, chromatic aberration, noise), `low` (bloom only), or `off`. Phones default to `off` and keep the full terminal experience with HTML panels. `PerformanceMonitor` steps quality down automatically on slow devices, and the 3D / FX toggles in the top bar let visitors choose.
 - **Reduced motion.** The site respects `prefers-reduced-motion`: it skips typing animations, auto-rotation and parallax, and cuts camera moves short. Visitors can also toggle this with **FX**.
-# terminal
