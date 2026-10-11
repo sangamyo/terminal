@@ -1,8 +1,8 @@
-# hari-om@portfolio:~$
+# Hari Om Kasaundhan — portfolio
 
-Interactive 3D developer portfolio for **Hari Om Kasaundhan**. A working terminal sits in front of a Three.js workspace.
+**Live:** https://sangamyo.github.io/terminal/
 
-> Don't just read my resume. Explore my system.
+A portfolio set in a small 3D studio. Each object on the desk opens a section: the monitor shows projects, the robot arm opens experience, the pinboard skills, the shelf education, the notepad contact and the name plate the about page. The lamp switches the room between day and night (it starts with the visitor's local time). Phones, browsers without WebGL and anyone who prefers it get the same content as one readable page.
 
 ## Run
 
@@ -13,43 +13,45 @@ npm run build     # production build → dist/
 npm run preview   # serve the build
 ```
 
-Deploy `dist/` to any static host (Vercel, Netlify, GitHub Pages, Cloudflare Pages).
+Every push to `main` deploys to GitHub Pages (`.github/workflows/deploy.yml`).
 
 ## Edit your content
 
-Everything you'd want to change lives in **`src/data/profile.js`**: links, skills, projects, timeline, education and the AI-core domains. The terminal, the HTML panels and the 3D scenes all read from it.
+Everything lives in **`src/data/profile.js`**: links, projects, skills, timeline and education. The 3D room, the panels, the simple page, the command menu and the terminal all read from it.
 
-- **Resume:** put your PDF at `public/resume.pdf`.
-- **Contact form:** set `contactFormEndpoint` to a Formspree (or similar) URL that accepts JSON. Leave it empty to fall back to `mailto:`.
-- **Links:** set a project's `github` / `live` URL to show its *GitHub* / *Live Demo* button; leave it `null` to hide the button.
+- **Résumé:** `public/resume.pdf`.
+- **Project screenshots:** `public/shots/<name>.jpg` (1280×800), referenced by a project's `shot`. Projects without one get a typeset title card on the monitor.
+- **Links:** set a project's `github` / `live` URL to show its button; leave it `null` to hide it.
+- **Contact form:** set `contactFormEndpoint` to a Formspree (or similar) URL that accepts JSON. Empty falls back to `mailto:`.
 
-## Commands
+## Keys
 
-`help` `about` `skills` `projects` `experience` `education` `github` `resume` `contact` `clear` `3d` `matrix` `ls` `home` `exit`
+`⌘K` / `Ctrl+K` / `/` command menu · `Esc` back to the desk · `←/→` flip projects on the monitor · `` ` `` terminal.
 
-Hidden: `whoami` `neofetch` `sudo` `coffee` `secret` `history` `echo` `date`
-
-Keys: ↑/↓ history · Tab autocomplete · Ctrl+L clear · Esc back to terminal · ←/→ cycle projects.
-
-To add a command, add an entry to `src/terminal/commands.jsx`. `help` lists it automatically.
+The terminal keeps the old commands (`help`, `whoami`, `neofetch`, `projects`, `skills`, `3d`, …). Add one in `src/terminal/commands.jsx`; `help` lists it automatically.
 
 ## Architecture
 
 ```
 src/
-  data/profile.js        all content (single source of truth)
-  store/useStore.js      zustand: view, selections, quality, reduced-motion, command bus
-  terminal/              engine (serial typed-output queue), commands, rich output blocks
-  sections/              glass HTML panels per view (+ 3D-free fallbacks)
-  three/                 lazy-loaded R3F scene
-    layout.js            world anchors + camera stations per view
-    CameraRig.jsx        damped camera flights, parallax, film-offset for panels, orbit mode
-    AICore / DomainOrbit / SkillUniverse / ProjectGallery / Timeline / Workstation / ...
-  ui/                    nav, digital rain, finale, lite background
+  data/profile.js        all content
+  store/useStore.js      zustand: view, day/night, palette + terminal, selections, quality
+  three/                 lazy-loaded R3F scene (its own chunk)
+    layout.js            object positions + a camera station per view
+    CameraRig.jsx        damped camera moves, parallax, film offset beside the HTML
+    Room / Desk / Monitor / RobotArm / Lamp / WallPieces
+    Hotspot.jsx          hover tag + click-to-open for desk objects
+    textures.js          procedural wood, floor, plaster and cork (no image files)
+  sections/              panel content shared by the 3D view and the simple page
+  ui/                    top bar, command menu, icons
+  terminal/              the terminal drawer
+  styles/site.css        design tokens (day/night), layout, components
 ```
 
-- **The terminal drives everything.** Nav clicks and 3D clicks dispatch commands through `runCommand`, so the terminal log always reflects where you are.
-- **Fast first paint.** three.js and R3F (~330 KB gzip) load in a separate chunk after the terminal is interactive (~127 KB gzip).
-- **Adaptive quality.** `high` (bloom, depth of field, chromatic aberration, noise), `low` (bloom only), or `off`. Phones default to `off` and keep the full terminal experience with HTML panels. `PerformanceMonitor` steps quality down automatically on slow devices, and the 3D / FX toggles in the top bar let visitors choose.
-- **Reduced motion.** The site respects `prefers-reduced-motion`: it skips typing animations, auto-rotation and parallax, and cuts camera moves short. Visitors can also toggle this with **FX**.
-# terminal
+- **Fast first paint.** The text and UI load first. three.js arrives in a separate chunk after the first paint.
+- **No downloaded 3D assets.** Every object is built from primitives, textures are drawn on canvases, and reflections come from light panels, so there's nothing to license and very little to load.
+- **Robot arm.** The arm runs a pick-and-place loop with two-link inverse kinematics, so the wrist keeps the gripper vertical.
+- **Adaptive quality.** Phones default to the simple page, and `PerformanceMonitor` lowers resolution on slow devices.
+- **Accessibility.** The site respects `prefers-reduced-motion` (no camera glides, no parallax, the arm stays still), every section is reachable from the keyboard, and the 3D canvas is `aria-hidden` because all its content is in the HTML.
+
+Fonts: Newsreader and IBM Plex (self-hosted via Fontsource).

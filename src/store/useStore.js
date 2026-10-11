@@ -1,38 +1,53 @@
 import { create } from 'zustand'
-import { detectQuality, hasWebGL, prefersReducedMotion } from '../lib/device'
+import { detectQuality, hasWebGL, prefersReducedMotion, safeStorage } from '../lib/device'
 
-export const VIEWS = ['terminal', 'about', 'skills', 'projects', 'experience', 'education', 'contact', 'immersive']
-/** Sections a visitor must open before the "connection established" finale plays. */
-export const EXPLORE_SET = ['about', 'skills', 'projects', 'experience', 'contact']
+export const VIEWS = ['home', 'about', 'projects', 'experience', 'skills', 'education', 'contact', 'explore']
 
 const initialView = () => {
-  const hash = typeof window !== 'undefined' ? window.location.hash.replace('#', '') : ''
-  return VIEWS.includes(hash) ? hash : 'terminal'
+  if (typeof window === 'undefined') return 'home'
+  const hash = window.location.hash.replace('#', '')
+  return VIEWS.includes(hash) ? hash : 'home'
+}
+
+/** Daylight between 7:00 and 18:59 in the visitor's own time zone, unless they picked one. */
+const initialLights = () => {
+  const saved = safeStorage('localStorage')?.getItem('hk-lights')
+  if (saved === 'day' || saved === 'night') return saved
+  const h = new Date().getHours()
+  return h >= 7 && h < 19 ? 'day' : 'night'
 }
 
 export const useStore = create((set, get) => ({
   /* navigation */
   view: initialView(),
-  visited: [],
   setView: (view) => {
     if (!VIEWS.includes(view)) return
-    const visited = get().visited.includes(view) ? get().visited : [...get().visited, view]
-    // On narrow screens the section panel needs the space, so the terminal tucks into a pill.
-    const narrow = typeof window !== 'undefined' && window.innerWidth < 1024
-    set({ view, visited, hoveredSkill: null, ...(view === 'terminal' ? { terminalOpen: true } : narrow || view === 'immersive' ? { terminalOpen: false } : {}) })
+    set({ view, hoveredSkill: null, projectDetails: null })
     if (typeof window !== 'undefined') {
-      const url = view === 'terminal' ? window.location.pathname : `#${view}`
-      window.history.replaceState(null, '', url)
+      window.history.replaceState(null, '', view === 'home' ? window.location.pathname : `#${view}`)
     }
   },
 
-  /* terminal command bus — UI elements (nav, 3D objects) route actions through the terminal */
+  /* 3D hover label */
+  hovered: null, // view id of the object under the pointer
+  setHovered: (hovered) => set({ hovered }),
+
+  /* day / night */
+  lights: initialLights(),
+  toggleLights: () => {
+    const lights = get().lights === 'day' ? 'night' : 'day'
+    safeStorage('localStorage')?.setItem('hk-lights', lights)
+    set({ lights })
+  },
+
+  /* command palette + terminal drawer */
+  paletteOpen: false,
+  setPaletteOpen: (paletteOpen) => set({ paletteOpen }),
+  terminalOpen: false,
+  setTerminalOpen: (terminalOpen) => set({ terminalOpen }),
+  // Clickable command names inside terminal output run through here.
   pendingCommand: null,
   runCommand: (cmd) => set({ pendingCommand: { cmd, id: performance.now() } }),
-  booted: false,
-  setBooted: (booted) => set({ booted }),
-  terminalOpen: true,
-  setTerminalOpen: (terminalOpen) => set({ terminalOpen }),
 
   /* skills */
   hoveredSkill: null,
@@ -43,21 +58,12 @@ export const useStore = create((set, get) => ({
   /* projects */
   projectIndex: 0,
   setProjectIndex: (projectIndex) => set({ projectIndex }),
-  projectDetails: null, // project id for modal
+  projectDetails: null, // project id for the details sheet
   setProjectDetails: (projectDetails) => set({ projectDetails }),
 
-  /* experience */
+  /* experience — index into `timeline`, newest work item by default */
   timelineIndex: 2,
   setTimelineIndex: (timelineIndex) => set({ timelineIndex }),
-
-  /* effects */
-  matrix: false,
-  setMatrix: (matrix) => set({ matrix }),
-  glitch: 0,
-  triggerGlitch: () => set({ glitch: performance.now() }),
-  finale: false,
-  finaleSeen: false,
-  setFinale: (finale) => set(finale ? { finale, finaleSeen: true } : { finale }),
 
   /* performance & accessibility */
   quality: detectQuality(), // 'high' | 'low' | 'off'

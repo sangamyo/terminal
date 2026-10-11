@@ -1,73 +1,53 @@
 import { Vector3 } from 'three'
-import { projects, timeline } from '../data/profile'
+import { asset } from '../lib/assets'
 
-// BASE_URL keeps public assets working when the site is served from a sub-path (GitHub Pages).
-const BASE = import.meta.env.BASE_URL
-export const FONT_MONO = `${BASE}fonts/jetbrains-mono-latin-500-normal.woff`
-export const FONT_DISPLAY = `${BASE}fonts/space-grotesk-latin-700-normal.woff`
+export { asset }
 
-/** World-space anchor of every section. The AI core sits at the origin. */
-export const ANCHORS = {
-  core: [0, 0, 0],
-  about: [-20, 0, -6],
-  skills: [0, 0.5, -28],
-  projects: [22, 0, -6],
-  experience: [0, 0, 26],
-  education: [-22, 8, -31],
-  contact: [22, 8, -31],
+export const FONT_SERIF = asset('fonts/newsreader-latin-500-normal.woff')
+export const FONT_SERIF_ITALIC = asset('fonts/newsreader-latin-400-italic.woff')
+export const FONT_SANS = asset('fonts/ibm-plex-sans-latin-500-normal.woff')
+export const FONT_MONO = asset('fonts/ibm-plex-mono-latin-500-normal.woff')
+
+/* Units are metres. The desk stands against the back wall; the window is on the left wall. */
+export const DESK_Y = 0.75
+export const DESK = { x: 0, z: -0.75, w: 2.2, d: 0.8 }
+export const WALL_Z = -1.2
+export const LEFT_WALL_X = -2.4
+
+/** Where each object sits (group origins). */
+export const SPOTS = {
+  monitor: [0.12, DESK_Y, -0.92],
+  keyboard: [0.08, DESK_Y, -0.53],
+  mouse: [0.43, DESK_Y, -0.52],
+  robot: [-0.66, DESK_Y, -0.86],
+  notepad: [-0.34, DESK_Y, -0.52],
+  nameplate: [0.74, DESK_Y, -0.46],
+  mug: [0.6, DESK_Y, -0.84],
+  lamp: [0.93, DESK_Y, -1.0],
+  shelf: [-0.62, 1.74, WALL_Z],
+  pinboard: [0.94, 1.7, WALL_Z],
+  clock: [-1.62, 2.22, WALL_Z],
+  plant: [1.62, 0, -0.86],
+  window: [LEFT_WALL_X, 1.6, -0.15],
 }
 
-const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]]
-
-/* ---------- project gallery: a gentle arc of holo cards ---------- */
-const PROJECT_SPACING = 4.6
-export function projectPosition(i) {
-  const offset = (i - (projects.length - 1) / 2) * PROJECT_SPACING
-  return add(ANCHORS.projects, [offset, 0, -0.02 * offset * offset])
+/** Camera position + look target for every view. */
+const STATIONS = {
+  home: { pos: [1.05, 1.55, 2.75], target: [0.12, 1.16, -0.8] },
+  about: { pos: [1.02, 1.0, 0.12], target: [0.74, 0.82, -0.46] },
+  projects: { pos: [0.12, 1.185, 0.02], target: [0.12, 1.17, -0.92] },
+  experience: { pos: [-0.22, 1.2, 0.04], target: [-0.66, 0.97, -0.84] },
+  skills: { pos: [0.94, 1.69, 0.14], target: [0.94, 1.7, WALL_Z] },
+  education: { pos: [-0.62, 1.66, 0.02], target: [-0.62, 1.8, WALL_Z] },
+  contact: { pos: [-0.28, 1.3, -0.06], target: [-0.34, 0.76, -0.52] },
+  explore: { pos: [1.9, 1.75, 2.35], target: [0, 1.0, -0.75] },
 }
-export function projectRotation() {
-  return [0, 0, 0] // cards face the camera square-on; the z-arc alone gives depth
-}
+export const stationFor = (view) => STATIONS[view] ?? STATIONS.home
 
-/* ---------- timeline: chronological left→right as seen from the camera (looking +z) ---------- */
-export function timelinePosition(i) {
-  const n = timeline.length
-  const span = 15
-  const x = span / 2 - (i * span) / Math.max(1, n - 1)
-  return add(ANCHORS.experience, [x, Math.sin(i * 1.3) * 0.6, Math.cos(i * 0.9) * 1.2])
-}
+/** HTML that covers part of the screen: section panels on the right, the intro on the left. */
+export const PANEL_VIEWS = new Set(['about', 'projects', 'experience', 'skills', 'education', 'contact'])
 
-/** Camera position + look target per view. Some depend on the current selection. */
-export function stationFor(state) {
-  switch (state.view) {
-    case 'about':
-      return { pos: [-16.4, 1.9, 0.2], target: add(ANCHORS.about, [0, 0.9, 0]) }
-    case 'skills':
-      return { pos: [0, 1.3, -15.4], target: ANCHORS.skills }
-    case 'projects': {
-      // Straight down +z: neighbours stay visible to the sides and never sit between camera and card.
-      const p = projectPosition(state.projectIndex)
-      return { pos: add(p, [0, 0.3, 8.2]), target: add(p, [0, 0.1, 0]) }
-    }
-    case 'experience': {
-      const p = timelinePosition(state.timelineIndex)
-      return { pos: [p[0] * 0.55, 2.4, ANCHORS.experience[2] - 9.5], target: p }
-    }
-    case 'education':
-      return { pos: [-16.6, 9.4, -22.6], target: ANCHORS.education }
-    case 'contact':
-      return { pos: [16.6, 9.4, -22.6], target: ANCHORS.contact }
-    case 'immersive':
-      return { pos: [0, 3.2, 14], target: ANCHORS.core }
-    default:
-      return { pos: [0, 0.7, 12.5], target: [0, 0.3, 0] }
-  }
-}
-
-/** Views that show an HTML panel on the right — the camera shifts so the 3D subject sits left of it. */
-export const PANEL_VIEWS = new Set(['about', 'skills', 'projects', 'experience', 'education', 'contact'])
-
-/** Shared, mutable focus point (camera look target) — read by depth of field & lighting. */
+/** Shared, mutable look target. */
 export const focusPoint = new Vector3()
 
 /** Global pointer in NDC (-1..1), tracked on window so parallax works over HTML overlays too. */

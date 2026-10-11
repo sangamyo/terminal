@@ -199,7 +199,7 @@ export function NeofetchBlock() {
     ['Main Stack', profile.mainStack],
     ['Current Focus', profile.currentFocus],
     ['Status', profile.status],
-    ['Shell', 'portfolio-sh 3.0 (react + three.js)'],
+    ['Shell', 'portfolio-sh 4.0 (react + three.js)'],
     ['Uptime', `${Math.floor(performance.now() / 1000)}s in this session`],
   ]
   return (
@@ -216,7 +216,7 @@ export function NeofetchBlock() {
           </Row>
         ))}
         <Row className="t-swatches">
-          {['#0b0f0e', '#39ff88', '#22e5ff', '#c6ff3d', '#7aa2ff', '#e8fff4'].map((c) => (
+          {['#1c1b1a', '#b4532a', '#3f7d63', '#3e5c8a', '#8a6a1f', '#ebe5da'].map((c) => (
             <span key={c} style={{ background: c }} />
           ))}
         </Row>
